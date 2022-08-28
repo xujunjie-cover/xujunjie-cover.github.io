@@ -1,476 +1,139 @@
-$(function () {
-
-  "use strict";
-
-  /***************************
-
-  preloader
-
-  ***************************/
-
-  $(document).ready(function () {
-
-    /***************************
-    window title
-    ***************************/
-    if (window.FAVICON && window.FAVICON.visibilitychange) {
-      window.originTitle = document.title;
-      let titleTime;
-      let icons = Array.from($('[rel="icon"]')).map(item => item.href)
-      document.addEventListener('visibilitychange', function () {
-        if (document.hidden) {
-          $('[rel="icon"]').attr('href', window.FAVICON.hidden);
-          document.title = window.FAVICON.hideText;
-          clearTimeout(titleTime);
+/* eslint-disable node/no-unsupported-features/node-builtins */
+(function($, moment, ClipboardJS, config) {
+    $('.article img:not(".not-gallery-item")').each(function() {
+        // wrap images with link and add caption if possible
+        if ($(this).parent('a').length === 0) {
+            $(this).wrap('<a class="gallery-item" href="' + $(this).attr('src') + '"></a>');
+            if (this.alt) {
+                $(this).after('<p class="has-text-centered is-size-6 caption">' + this.alt + '</p>');
+            }
         }
-        else {
-          Array.from($('[rel="icon"]')).map((item, index) => {
-            item.href = icons[index]
-          })
-          document.title = window.FAVICON.showText + window.originTitle;
-          titleTime = setTimeout(function () {
-            document.title = window.originTitle;
-          }, 2000);
+    });
+
+    if (typeof $.fn.lightGallery === 'function') {
+        $('.article').lightGallery({ selector: '.gallery-item' });
+    }
+    if (typeof $.fn.justifiedGallery === 'function') {
+        if ($('.justified-gallery > p > .gallery-item').length) {
+            $('.justified-gallery > p > .gallery-item').unwrap();
         }
-      });
+        $('.justified-gallery').justifiedGallery();
     }
 
-    /***************************
-    处理文章中图片
-    ***************************/
-    $("article img").each(function () {
-      var element = document.createElement("span");
-      $(element).attr("data-fancybox", "gallery");
-      $(element).attr("href", $(this).attr("src"));
-      $(this).wrap(element);
-    })
-
-    $('html').addClass('is-animating');
-    $(".trm-scroll-container").animate({
-      opacity: 0,
-    });
-    setTimeout(function () {
-      $('html').removeClass('is-animating');
-      $(".trm-scroll-container").animate({
-        opacity: 1,
-      }, 600);
-    }, 1000);
-  });
-
-  /***************************
-
-  swup
-
-  ***************************/
-  const options = {
-    containers: ['#trm-dynamic-content'],
-    animateHistoryBrowsing: true,
-    linkSelector: '.trm-menu a:not([data-no-swup]), .trm-anima-link:not([data-no-swup])',
-    animationSelector: '[class="trm-swup-animation"]'
-  };
-  const swup = new Swup(options);
-  /***************************
-
-  menu
-
-  ***************************/
-  $('.trm-menu-btn').on('click', function () {
-    $('.trm-menu-btn , .trm-right-side').toggleClass('trm-active');
-  })
-  $('.trm-menu ul li a').on('click', function () {
-    $('.trm-menu-btn , .trm-right-side').removeClass('trm-active');
-  })
-  /***************************
-
-  mode switch
-
-  ***************************/
-  let checked = (localStorage.getItem('theme-mode') || THEME.default) == 'style-dark';
-  $('#trm-swich').attr('checked', checked)
-  if (checked) {
-    $('.trm-mode-swich-animation').addClass('trm-active');
-    $('.trm-mode-swich-animation-frame').removeClass('trm-active');
-  } else {
-    $('.trm-mode-swich-animation').removeClass('trm-active');
-    $('.trm-mode-swich-animation-frame').removeClass('trm-active');
-  }
-  $('.trm-mode-switcher').clone().appendTo('.trm-mode-switcher-place');
-  $('#trm-swich').change(function () {
-    if (this.checked) {
-      $('.trm-hidden-switcher input').prop("checked", true);
-      $('.trm-mode-swich-animation-frame').addClass('trm-active');
-      $("#trm-scroll-container").animate({
-        opacity: 0,
-      }, 600, function () {
-        setTimeout(function () {
-          $('.trm-mode-swich-animation').addClass('trm-active');
-          $("#trm-switch-style").attr("href", "/css/style-dark.css?" + window.HTMEM_VERSION);
-        }, 200);
-        setTimeout(function () {
-          $('.trm-mode-swich-animation-frame').removeClass('trm-active');
-          $("#trm-scroll-container").animate({
-            opacity: 1,
-          }, 600);
-        }, 1000);
-      });
-    } else {
-      $('.trm-hidden-switcher input').prop("checked", false);
-      $('.trm-mode-swich-animation-frame').addClass('trm-active');
-      $("#trm-scroll-container").animate({
-        opacity: 0,
-      }, 600, function () {
-        setTimeout(function () {
-          $('.trm-mode-swich-animation').removeClass('trm-active');
-          $("#trm-switch-style").attr("href", "/css/style-light.css?" + window.HTMEM_VERSION);
-        }, 200);
-        setTimeout(function () {
-          $('.trm-mode-swich-animation-frame').removeClass('trm-active');
-          $("#trm-scroll-container").animate({
-            opacity: 1,
-          }, 600);
-        }, 1000);
-      });
-    }
-    localStorage.setItem('theme-mode', this.checked ? 'style-dark' : 'style-light')
-  });
-  /***************************
-
-  counters
-
-  ***************************/
-  $('.trm-counter').each(function () {
-    $(this).prop('Counter', 0).animate({
-      Counter: $(this).text()
-    }, {
-      duration: 2000,
-      easing: 'linear',
-      step: function (now) {
-        $(this).text(Math.ceil(now));
-      }
-    });
-  });
-  /***************************
-
-  locomotive scroll
-
-  ***************************/
-  const scroll = new LocomotiveScroll({
-    el: document.querySelector('#trm-scroll-container'),
-    smooth: true,
-    lerp: .1,
-    reloadOnContextChange: true
-  });
-
-  const comComment = $('.comment-container')
-  if (comComment.length) {
-    const ro = new ResizeObserver(entries => {
-      scroll.scrollTo(0, {
-        callback () {
-          scroll.update();
-        }
-      });
-    });
-    ro.observe(comComment[0]);
-  }
-
-  scroll.on('scroll', ({ scroll }) => {
-    if (scroll.y > 500) {
-      $('#post-toc').show(300)
-    } else {
-      $('#post-toc').hide(300)
-    }
-  });
-
-  document.addEventListener('swup:contentReplaced', (event) => {
-    scroll.destroy()
-  });
-
-  /***************************
-
-  slideshow
-
-  ***************************/
-  var swiper = new Swiper('.trm-slideshow', {
-    slidesPerView: 1,
-    effect: 'fade',
-    parallax: true,
-    autoplay: true,
-    speed: 1400,
-  });
-  /***************************
-
-  testimonials slider
-
-  ***************************/
-  var swiper = new Swiper('.trm-testimonials-slider', {
-    slidesPerView: 1,
-    spaceBetween: 40,
-    parallax: true,
-    autoplay: false,
-    speed: 1400,
-    pagination: {
-      el: '.trm-testimonials-slider-pagination',
-      clickable: true,
-    },
-    navigation: {
-      nextEl: '.trm-testimonials-slider-next',
-      prevEl: '.trm-testimonials-slider-prev',
-    },
-
-  });
-  /***************************
-
-  fancybox
-
-  ***************************/
-  $('[data-fancybox]').fancybox({
-    animationEffect: "zoom-in-out",
-    animationDuration: 600,
-    transitionDuration: 1200,
-    buttons: [
-      "zoom",
-      "slideShow",
-      "thumbs",
-      "close",
-    ],
-  });
-  $('[data-fancybox="gallery"]').fancybox({
-    animationEffect: "zoom-in-out",
-    animationDuration: 600,
-    transitionDuration: 1200,
-    buttons: [
-      "zoom",
-      "slideShow",
-      "thumbs",
-      "close",
-    ],
-  });
-  $('[data-fancybox="portfolio"]').fancybox({
-    animationEffect: "zoom-in-out",
-    animationDuration: 600,
-    transitionDuration: 1200,
-    buttons: [
-      "zoom",
-      "slideShow",
-      "thumbs",
-      "close",
-    ],
-  });
-  $.fancybox.defaults.hash = false;
-
-  /*----------------------------------------------------------
-  ------------------------------------------------------------
-
-  REINIT
-
-  ------------------------------------------------------------
-  ----------------------------------------------------------*/
-  document.addEventListener("swup:contentReplaced", function () {
-    /***************************
-
-    底部倒计时
-
-    ***************************/
-
-    show_date_time && show_date_time();
-
-    /***************************
-
-    处理文章中图片
-
-    ***************************/
-    $("article img").each(function () {
-      var element = document.createElement("span");
-      $(element).attr("data-fancybox", "gallery");
-      $(element).attr("href", $(this).attr("src"));
-      $(this).wrap(element);
-    })
-    /***************************
-
-    preloader
-
-    ***************************/
-    $(".trm-scroll-container").animate({
-      opacity: 1,
-    }, 600);
-    /***************************
-
-    menu
-
-    ***************************/
-    $('.trm-menu-btn').on('click', function () {
-      $('.trm-menu-btn , .trm-right-side').toggleClass('trm-active');
-    })
-    $('.trm-menu ul li a').on('click', function () {
-      $('.trm-menu-btn , .trm-right-side').removeClass('trm-active');
-    })
-    /***************************
-
-    mode switch
-
-    ***************************/
-    $('.trm-mode-switcher').clone().appendTo('.trm-mode-switcher-place');
-    $('#trm-swich').change(function () {
-      if (this.checked) {
-        $('.trm-hidden-switcher input').prop("checked", true);
-        $('.trm-mode-swich-animation-frame').addClass('trm-active');
-        $("#trm-scroll-container").animate({
-          opacity: 0,
-        }, 600, function () {
-          setTimeout(function () {
-            $('.trm-mode-swich-animation').addClass('trm-active');
-            $("#trm-switch-style").attr("href", "/css/style-dark.css?" + window.HTMEM_VERSION);
-          }, 200);
-          setTimeout(function () {
-            $('.trm-mode-swich-animation-frame').removeClass('trm-active');
-            $("#trm-scroll-container").animate({
-              opacity: 1,
-            }, 600);
-          }, 1000);
+    if (typeof moment === 'function') {
+        $('.article-meta time').each(function() {
+            $(this).text(moment($(this).attr('datetime')).fromNow());
         });
-      } else {
-        $('.trm-hidden-switcher input').prop("checked", false);
-        $('.trm-mode-swich-animation-frame').addClass('trm-active');
-        $("#trm-scroll-container").animate({
-          opacity: 0,
-        }, 600, function () {
-          setTimeout(function () {
-            $('.trm-mode-swich-animation').removeClass('trm-active');
-            $("#trm-switch-style").attr("href", "/css/style-light.css?" + window.HTMEM_VERSION);
-          }, 200);
-          setTimeout(function () {
-            $('.trm-mode-swich-animation-frame').removeClass('trm-active');
-            $("#trm-scroll-container").animate({
-              opacity: 1,
-            }, 600);
-          }, 1000);
-        });
-      }
-      localStorage.setItem('theme-mode', this.checked ? 'style-dark' : 'style-light')
-    });
-    /***************************
-
-    counters
-
-    ***************************/
-    $('.trm-counter').each(function () {
-      $(this).prop('Counter', 0).animate({
-        Counter: $(this).text()
-      }, {
-        duration: 2000,
-        easing: 'linear',
-        step: function (now) {
-          $(this).text(Math.ceil(now));
-        }
-      });
-    });
-    /***************************
-
-    locomotive scroll
-
-    ***************************/
-    const scroll = new LocomotiveScroll({
-      el: document.querySelector('#trm-scroll-container'),
-      smooth: true,
-      lerp: .1,
-      reloadOnContextChange: true
-    });
-
-    const comComment = $('.comment-container')
-    if (comComment.length) {
-      const ro = new ResizeObserver(entries => {
-        scroll.scrollTo(0, {
-          callback () {
-            scroll.update();
-          }
-        });
-      });
-      ro.observe(comComment[0]);
     }
 
-    scroll.on('scroll', ({ scroll }) => {
-      if (scroll.y > 500) {
-        $('#post-toc').show(300)
-      } else {
-        $('#post-toc').hide(300)
-      }
+    $('.article > .content > table').each(function() {
+        if ($(this).width() > $(this).parent().width()) {
+            $(this).wrap('<div class="table-overflow"></div>');
+        }
     });
 
-    document.addEventListener('swup:contentReplaced', (event) => {
-      scroll.destroy()
-    });
-    /***************************
+    function adjustNavbar() {
+        const navbarWidth = $('.navbar-main .navbar-start').outerWidth() + $('.navbar-main .navbar-end').outerWidth();
+        if ($(document).outerWidth() < navbarWidth) {
+            $('.navbar-main .navbar-menu').addClass('justify-content-start');
+        } else {
+            $('.navbar-main .navbar-menu').removeClass('justify-content-start');
+        }
+    }
+    adjustNavbar();
+    $(window).resize(adjustNavbar);
 
-    slideshow
+    function toggleFold(codeBlock, isFolded) {
+        const $toggle = $(codeBlock).find('.fold i');
+        !isFolded ? $(codeBlock).removeClass('folded') : $(codeBlock).addClass('folded');
+        !isFolded ? $toggle.removeClass('fa-angle-right') : $toggle.removeClass('fa-angle-down');
+        !isFolded ? $toggle.addClass('fa-angle-down') : $toggle.addClass('fa-angle-right');
+    }
 
-    ***************************/
-    var swiper = new Swiper('.trm-slideshow', {
-      slidesPerView: 1,
-      effect: 'fade',
-      parallax: true,
-      autoplay: true,
-      speed: 1400,
-    });
-    /***************************
+    function createFoldButton(fold) {
+        return '<span class="fold">' + (fold === 'unfolded' ? '<i class="fas fa-angle-down"></i>' : '<i class="fas fa-angle-right"></i>') + '</span>';
+    }
 
-    testimonials slider
+    $('figure.highlight table').wrap('<div class="highlight-body">');
+    if (typeof config !== 'undefined'
+        && typeof config.article !== 'undefined'
+        && typeof config.article.highlight !== 'undefined') {
 
-    ***************************/
-    var swiper = new Swiper('.trm-testimonials-slider', {
-      slidesPerView: 1,
-      spaceBetween: 40,
-      parallax: true,
-      autoplay: false,
-      speed: 1400,
-      pagination: {
-        el: '.trm-testimonials-slider-pagination',
-        clickable: true,
-      },
-      navigation: {
-        nextEl: '.trm-testimonials-slider-next',
-        prevEl: '.trm-testimonials-slider-prev',
-      },
+        $('figure.highlight').addClass('hljs');
+        $('figure.highlight .code .line span').each(function() {
+            const classes = $(this).attr('class').split(/\s+/);
+            if (classes.length === 1) {
+                $(this).addClass('hljs-' + classes[0]);
+                $(this).removeClass(classes[0]);
+            }
+        });
 
-    });
-    /***************************
 
-    fancybox
+        const clipboard = config.article.highlight.clipboard;
+        const fold = config.article.highlight.fold.trim();
 
-    ***************************/
-    $('[data-fancybox]').fancybox({
-      animationEffect: "zoom-in-out",
-      animationDuration: 600,
-      transitionDuration: 1200,
-      buttons: [
-        "zoom",
-        "slideShow",
-        "thumbs",
-        "close",
-      ],
-    });
-    $('[data-fancybox="gallery"]').fancybox({
-      animationEffect: "zoom-in-out",
-      animationDuration: 600,
-      transitionDuration: 1200,
-      buttons: [
-        "zoom",
-        "slideShow",
-        "thumbs",
-        "close",
-      ],
-    });
-    $('[data-fancybox="portfolio"]').fancybox({
-      animationEffect: "zoom-in-out",
-      animationDuration: 600,
-      transitionDuration: 1200,
-      buttons: [
-        "zoom",
-        "slideShow",
-        "thumbs",
-        "close",
-      ],
-    });
-    $.fancybox.defaults.hash = false;
-  });
+        $('figure.highlight').each(function() {
+            if ($(this).find('figcaption').length) {
+                $(this).find('figcaption').addClass('level is-mobile');
+                $(this).find('figcaption').append('<div class="level-left">');
+                $(this).find('figcaption').append('<div class="level-right">');
+                $(this).find('figcaption div.level-left').append($(this).find('figcaption').find('span'));
+                $(this).find('figcaption div.level-right').append($(this).find('figcaption').find('a'));
+            } else {
+                if (clipboard || fold) {
+                    $(this).prepend('<figcaption class="level is-mobile"><div class="level-left"></div><div class="level-right"></div></figcaption>');
+                }
+            }
+        });
 
-});
+        if (typeof ClipboardJS !== 'undefined' && clipboard) {
+            $('figure.highlight').each(function() {
+                const id = 'code-' + Date.now() + (Math.random() * 1000 | 0);
+                const button = '<a href="javascript:;" class="copy" title="Copy" data-clipboard-target="#' + id + ' .code"><i class="fas fa-copy"></i></a>';
+                $(this).attr('id', id);
+                $(this).find('figcaption div.level-right').append(button);
+            });
+            new ClipboardJS('.highlight .copy'); // eslint-disable-line no-new
+        }
+
+        if (fold) {
+            $('figure.highlight').each(function() {
+                $(this).addClass('foldable'); // add 'foldable' class as long as fold is enabled
+
+                if ($(this).find('figcaption').find('span').length > 0) {
+                    const span = $(this).find('figcaption').find('span');
+                    if (span[0].innerText.indexOf('>folded') > -1) {
+                        span[0].innerText = span[0].innerText.replace('>folded', '');
+                        $(this).find('figcaption div.level-left').prepend(createFoldButton('folded'));
+                        toggleFold(this, true);
+                        return;
+                    }
+                }
+                $(this).find('figcaption div.level-left').prepend(createFoldButton(fold));
+                toggleFold(this, fold === 'folded');
+            });
+
+            $('figure.highlight figcaption .level-left').click(function() {
+                const $code = $(this).closest('figure.highlight');
+                toggleFold($code.eq(0), !$code.hasClass('folded'));
+            });
+        }
+    }
+
+    const $toc = $('#toc');
+    if ($toc.length > 0) {
+        const $mask = $('<div>');
+        $mask.attr('id', 'toc-mask');
+
+        $('body').append($mask);
+
+        function toggleToc() { // eslint-disable-line no-inner-declarations
+            $toc.toggleClass('is-active');
+            $mask.toggleClass('is-active');
+        }
+
+        $toc.on('click', toggleToc);
+        $mask.on('click', toggleToc);
+        $('.navbar-main .catalogue').on('click', toggleToc);
+    }
+}(jQuery, window.moment, window.ClipboardJS, window.IcarusThemeSettings));

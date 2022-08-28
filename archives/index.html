@@ -1,472 +1,75 @@
-<!DOCTYPE html>
-<html lang="">
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"><meta name="robots" content="noindex"><meta><title>Archives - Blog</title><link rel="manifest" href="/manifest.json"><meta name="application-name" content="Blog"><meta name="msapplication-TileImage" content="/img/favicon.svg"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Blog"><meta name="apple-mobile-web-app-status-bar-style" content="default"><meta property="og:type" content="blog"><meta property="og:title" content="Blog"><meta property="og:url" content="http://example.com/"><meta property="og:site_name" content="Blog"><meta property="og:locale" content="en_US"><meta property="og:image" content="http://example.com/img/og_image.png"><meta property="article:author" content="Xu Junjie"><meta property="twitter:card" content="summary"><meta property="twitter:image:src" content="http://example.com/img/og_image.png"><script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","mainEntityOfPage":{"@type":"WebPage","@id":"http://example.com"},"headline":"Blog","image":["http://example.com/img/og_image.png"],"author":{"@type":"Person","name":"Xu Junjie"},"publisher":{"@type":"Organization","name":"Blog","logo":{"@type":"ImageObject","url":"http://example.com/img/logo.svg"}},"description":""}</script><link rel="icon" href="/img/favicon.svg"><link rel="stylesheet" href="https://use.fontawesome.com/releases/v6.0.0/css/all.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;600&amp;family=Source+Code+Pro"><link rel="stylesheet" href="/css/default.css"><style>body>.footer,body>.navbar,body>.section{opacity:0}</style><!--!--><!--!--><!--!--><!--!--><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/css/lightgallery.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/css/justifiedGallery.min.css"><!--!--><!--!--><style>.pace{-webkit-pointer-events:none;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}.pace-inactive{display:none}.pace .pace-progress{background:#3273dc;position:fixed;z-index:2000;top:0;right:100%;width:100%;height:2px}</style><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!--!--><!--!--><!-- hexo injector head_end start --><script>
+  (function () {
+      function switchTab() {
+          if (!location.hash) {
+            return;
+          }
 
-<head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-<meta name="x5-fullscreen" content="true">
-<meta name="full-screen" content="yes">
-<meta name="theme-color" content="#317EFB" />
-<meta content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=0" name="viewport">
-<meta name="keywords" content="">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://example.com/archives/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:locale" content="en_US">
-<meta property="article:author" content="John Doe">
-<meta name="twitter:card" content="summary">
+          const $tabMenu = document.querySelector(`a[href="${location.hash}"]`);
+          if (!$tabMenu) {
+            return;
+          }
 
-<title>
-    Hexo
-</title>
+          const $tabMenuContainer = $tabMenu.parentElement.parentElement;
+          Array.from($tabMenuContainer.children).forEach($menu => $menu.classList.remove('is-active'));
+          Array.from($tabMenuContainer.querySelectorAll('a'))
+              .map($menu => document.getElementById($menu.getAttribute("href").substring(1)))
+              .forEach($content => $content.classList.add('is-hidden'));
 
-
-
-
-<link rel="preload" href="//at.alicdn.com/t/font_1518765_bkgx3wku6h4.woff2" as="font" type="font/woff2" crossorigin="anonymous">
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1518765_bkgx3wku6h4.css">
-
-
-<link rel="stylesheet" href="/css/plugins/bootstrap.min.css">
-<link rel="stylesheet" href="/css/plugins/locomotive-scroll.css">
-<link rel="stylesheet" href="/css/plugins/swiper.min.css">
-<link rel="stylesheet" href="/css/plugins/fancybox.min.css">
-<link rel="stylesheet" href="/css/plugins/font-awesome.min.css">
-
-
-<!-- variable -->
-<script>window.TYPED_TEXT=[
-  "Xu Junjie"
-]</script>
-<script>window.FAVICON={
-  "icon16": null,
-  "icon32": null,
-  "appleTouchIcon": null,
-  "webmanifest": null,
-  "visibilitychange": false,
-  "hidden": null,
-  "showText": "(/≧▽≦/)咦！又好了！",
-  "hideText": "(●—●)喔哟，崩溃啦！"
-}</script>
-<script>window.HTMEM_VERSION='1.0.2'</script>
-<script>window.THEME={
-  "switch": true,
-  "default": "style-light"
-}</script>
-
-<!-- theme css -->
-
-    <link data-theme-type="style-light" rel="stylesheet" href="/css/style-light.css?v=1.0.2" id="trm-switch-style">
-    <link data-theme-type="style-dark" rel="stylesheet" href="/css/style-dark.css?v=1.0.2" id="trm-switch-style">
-    <script>
-        let catchMode = localStorage.getItem('theme-mode') || THEME.default;
-        let themeMode = catchMode === 'style-dark' ? 'style-light' : 'style-dark';
-        let linkdom = document.querySelector('[data-theme-type='+themeMode+']');
-        if(linkdom) linkdom.remove();
-    </script>
-
-
-<!-- Site Analytics -->
- 
-<meta name="generator" content="Hexo 6.2.0"></head>
-
-<body>
-
-  <!-- app wrapper -->
-  <div class="trm-app-frame">
-
-    <!-- page preloader -->
-    <div class="trm-preloader">
-    <div class="trm-holder">
-        <div class="preloader">
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>
-</div>
-    <!-- page preloader end -->
-
-    <!-- change mode preloader -->
-    <div class="trm-mode-swich-animation-frame">
-    <div class="trm-mode-swich-animation"><i class="far fa-sun"></i>
-        <div class="trm-horizon"></div>
-        <i class="far fa-moon"></i>
-    </div>
-</div>
-    <!-- change mode preloader end -->
-
-      <!-- scroll container -->
-      <div id="trm-dynamic-content" class="trm-swup-animation">
-        <div id="trm-scroll-container" class="trm-scroll-container" data-scroll-container style="opacity: 0">
-          <div data-scroll-section id="content" class="trm-scroll-section">
-            <!-- top bar -->
-            <div class="trm-top-bar" data-scroll data-scroll-sticky data-scroll-target="#content" data-scroll-offset="-10">
-	<div class="container">
-		<div class="trm-left-side">
-			<!-- logo -->
-			<a href="/" class="trm-logo-frame trm-anima-link">
-				<img src="/logo.png" alt="logo">
-				<div class="trm-logo-text">
-					Theme
-					<span>Async</span>
-				</div>
-			</a>
-			<!-- logo end -->
-		</div>
-		<div class="trm-right-side">
-
-			<!-- menu -->
-			<div class="trm-menu">
-				<nav>
-					<ul>
-						
-						<li class="menu-item-has-children ">
-							<a  href="/">
-								首页
-							</a>
-							
-						</li>
-						
-						<li class="menu-item-has-children current-menu-item">
-							<a  href="/archives/">
-								归档
-							</a>
-							
-						</li>
-						
-						<li class="menu-item-has-children ">
-							<a  href="/links/">
-								友链
-							</a>
-							
-						</li>
-						
-						<li class="menu-item-has-children ">
-							<a  href="/about/">
-								关于
-							</a>
-							
-						</li>
-						
-					</ul>
-				</nav>
-			</div>
-			<!-- menu end -->
-			
-			<!-- mode switcher place -->
-			
-			<div class="trm-mode-switcher-place"></div>
-			
-			<!-- mode switcher place end -->
-
-		</div>
-		<div class="trm-menu-btn">
-			<span></span>
-		</div>
-	</div>
-</div>
-            <!-- top bar end -->
-
-            <!-- body -->
-            <div class="trm-content-start">
-
-    <!-- banner -->
-    <div class="trm-banner" data-scroll data-scroll-direction="vertical">
-    <!-- banner cover -->
-    <img src="https://w.wallhaven.cc/full/j5/wallhaven-j5we85.jpg" alt="banner" class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-3">
-    <!-- banner cover end -->
-
-    <!-- banner slideshow cover-->
-    <!-- <div class="swiper-container trm-slideshow" data-scroll data-scroll-direction="vertical" data-scroll-speed="-4">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide"><img src="/img/blog/b1.jpg" alt="banner" class="trm-banner-cover" data-swiper-parallax-y="-200" data-swiper-parallax-scale="1.2"></div>
-            <div class="swiper-slide"><img src="/img/blog/b2.jpg" alt="banner" class="trm-banner-cover" data-swiper-parallax-y="-200" data-swiper-parallax-scale="1.2"></div>
-            <div class="swiper-slide"><img src="/img/blog/b3.jpg" alt="banner" class="trm-banner-cover" data-swiper-parallax-y="-200" data-swiper-parallax-scale="1.2"></div>
-        </div>
-    </div> -->
-    <!-- banner slideshow cover end -->
-
-    <!-- banner video cover -->
-    <!-- <video autoplay="autoplay" loop muted playsinline webkit-playinginline class="trm-banner-cover" data-scroll data-scroll-direction="vertical" data-scroll-speed="-4">
-        <source src="img/banner.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
-        <source src="img/banner.webm" type='video/webm; codecs="vp8, vorbis"'>
-        <source src="img/banner.ogg" type='video/ogg; codecs="theora, vorbis"'>
-        Your browser does not support HTML5 video.
-    </video> -->
-    <!-- banner video cover end -->
-
-    <!-- banner cover end -->
-
-    <!-- banner content -->
-    <div class="trm-banner-content trm-overlay">
-        <div class="container" data-scroll data-scroll-direction="vertical" data-scroll-speed="0">
-            <div class="row">
-                <div class="col-lg-4"></div>
-                <div class="col-lg-8">
-
-                    <!-- banner title -->
-                    <div class="trm-banner-text">
-                        <div class="trm-label trm-mb-20">
-                            The article archive
-                        </div>
-                        <h1 class="trm-mb-30 trm-hsmb-font">
-                            云间连下榻，<br>天上接行杯。
-                        </h1>
-
-                        
-                            <ul class="trm-breadcrumbs trm-label">
-                                <li>
-                                    <a href="/" class="trm-anima-link">Home</a>
-                                </li>
-                                <li>
-                                    <span>
-                                        archives
-                                    </span
-                                ></li>
-                            </ul>
-                        
-                    </div>
-                    <!-- banner title end -->
-
-                    <!-- scroll hint -->
-                    <a href="#about-triger" data-scroll-to="#about-triger" data-scroll-offset="-130" class="trm-scroll-hint-frame">
-                        <div class="trm-scroll-hint"></div>
-                        <span class="trm-label">Scroll down</span>
-                    </a>
-                    <!-- scroll hint end -->
-
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- banner content end -->
-</div>
-    <!-- banner end -->
-
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-4">
-
-                <!-- main card -->
-                <div class="trm-main-card-frame trm-sidebar">
-    <div class="trm-main-card" data-scroll data-scroll-repeat data-scroll-sticky data-scroll-target="#content" data-scroll-offset="60">
-        <!-- card header -->
-        <div class="trm-mc-header">
-            <div class="trm-avatar-frame trm-mb-20"><img class="trm-avatar" src="博主头像信息" alt="Avatar"> </div>
-            <h5 class="trm-name trm-mb-15">
-                ThemeAsync
-            </h5>
-            <div class="trm-label">
-                I`m
-                <span class="trm-typed-text">
-                    <!-- Words for theme.user.typedText -->
-                </span>
-            </div>
-        </div>
-        <!-- card header end -->
-        <div class="trm-divider trm-mb-40 trm-mt-40"></div>
-        <!-- sidebar social -->
-        <div class="trm-social">
-            
-                <a href="https://github.com" rel="nofollow" target="_blank">
-                    <i class="fab fa-github"></i>
-                </a>
-            
-                <a href="https://gitee.com" rel="nofollow" target="_blank">
-                    <i class="iconfont cg-gitee"></i>
-                </a>
-            
-                <a href="https://weibo.com/" rel="nofollow" target="_blank">
-                    <i class="iconfont cg-weibo"></i>
-                </a>
-            
-        </div>
-        <!-- sidebar social end -->
-        <div class="trm-divider trm-mb-40 trm-mt-40"></div>
-        <!-- info -->
-        <ul class="trm-table trm-mb-20">
-            
-                <li>
-                    <div class="trm-label">
-                        Residence:
-                    </div>
-                    <div class="trm-label trm-label-light">
-                        Mars
-                    </div>
-                </li>
-            
-                <li>
-                    <div class="trm-label">
-                        City:
-                    </div>
-                    <div class="trm-label trm-label-light">
-                        Peking
-                    </div>
-                </li>
-            
-                <li>
-                    <div class="trm-label">
-                        Age:
-                    </div>
-                    <div class="trm-label trm-label-light">
-                        28
-                    </div>
-                </li>
-            
-        </ul>
-        
-    </div>
-</div>
-                <!-- main card end -->
-                
-            </div>
-            <div class="col-lg-8">
-                <!-- content -->
-                <div class="trm-content" id="trm-content">
-                    <div data-scroll data-scroll-repeat data-scroll-offset="500" id="about-triger"></div>
-
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <div class="trm-card">
-                                
-                                    <div style="padding: 0 20px;">
-                                        <ul class="row trm-list" style="margin-bottom: 0px;"><li class="col-lg-4 trm-list-item" style="margin: 6px 0;"><a class="archive-list-link" href="/archives/2022/">2022</a><span class="archive-list-count">（1）</span></li></ul>
-                                    </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- history -->
-                    <div class="row">
-                        <div class="col-lg-12">
-                            <!-- title -->
-                            <h5 class="trm-mb-40 trm-title-with-divider">
-                                
-                                    All Archives
-                                
-                                <span data-number="01"></span>
-                            </h5>
-                        </div>
-                        <div class="col-lg-12">
-                            <!-- timeline -->
-                            <div class="trm-timeline">
-                                
-                                <div class="trm-timeline-item trm-scroll-animation" data-scroll data-scroll-offset="40">
-                                    <div class="trm-timeline-mark-light"></div>
-                                    <div class="trm-timeline-mark"></div>
-                                    <div class="trm-a trm-timeline-content">
-                                        <div class="trm-card-header">
-                                            <div class="trm-left-side">
-                                                <h6 class="trm-mb-15">
-                                                    <a href="/2022/08/26/%E8%87%B4%E6%A9%A1%E6%A0%91/" class="trm-anima-link">
-                                                        致橡树
-                                                    </a>
-                                                </h6>
-                                                <div class="trm-text-sm trm-accent-color trm-mb-15">
-                                                    <ul class="trm-card-data trm-label ">
-                                                        <li class="trm-accent-color">08/26</li>
-                                                        <li class="trm-accent-color">01:59</li>
-                                                        <li >258</li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div>
-                                            
-                                                <p>我如果爱你，<br>绝不像攀援的凌霄花，<br>借你的高枝炫耀自己；<br>我如果爱你，<br>绝不学痴情的鸟儿，<br>为绿荫重复单调的歌曲；<b...
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                                
-                            </div>
-                            <!-- timeline end -->
-                        </div>
-                    </div>
-                    <!-- history end -->
-
-                    <div class="trm-divider trm-mb-40"></div>
-
-                    <!-- footer -->
-                    <footer class="trm-scroll-animation" data-scroll data-scroll-offset="50">
-    <div class="trm-label">
-        ©  2022- 2022 ·
-        <span class="trm-accent-color">
-            ThemeAsync
-        </span>
-    </div>
-    <div class="trm-label">
-        The blog has been lovely to run:
-        <span id="since" class="trm-accent-color"></span>
-        day
-    </div>
-</footer>
-<script>
-    function show_date_time () {
-        BirthDay = new Date("04/10/2022 17:00:00");
-        today = new Date();
-        timeold = (today.getTime() - BirthDay.getTime());
-        msPerDay = 24 * 60 * 60 * 1000
-        day = Math.floor(timeold / msPerDay)
-        since.innerHTML = day
-    }
-    show_date_time()
-</script>
-                    <!-- footer end -->
-
-                </div>
-            </div>
-            <!-- content end -->
-        </div>
-    </div>
-</div>
-</div>
-            <!-- body end -->
-          </div>
-        </div>
-      </div>
-      <!-- scroll container end -->
-
-      <!-- mode switcher -->
-      <div class="trm-hidden-switcher">
-        <div class="trm-mode-switcher"><i class="far fa-sun"></i>
-          <input class="tgl tgl-light" id="trm-swich" type="checkbox">
-          <label class="trm-swich" for="trm-swich"></label>
-          <i class="far fa-moon"></i>
-        </div>
-      </div>
-      <!-- mode switcher end -->
-
-  </div>
-  <!-- app wrapper end -->
-
-  
-<script src="/js/plugins/jquery.min.js"></script>
-<script src="/js/plugins/swup.min.js"></script>
-<script src="/js/plugins/locomotive-scroll.js"></script>
-<script src="/js/plugins/typing.js"></script>
-<script src="/js/plugins/fancybox.min.js"></script>
-<script src="/js/plugins/swiper.min.js"></script>
-
-
-<!-- 评论插件 -->
-
-
-<!-- Service Worker -->
-
-
-<script src="/js/main.js?v=1.0.2"></script>
-
-
-</body>
-
-</html>
+          if ($tabMenu) {
+              $tabMenu.parentElement.classList.add('is-active');
+          }
+          const $activeTab = document.querySelector(location.hash);
+          if ($activeTab) {
+              $activeTab.classList.remove('is-hidden');
+          }
+      }
+      switchTab();
+      window.addEventListener('hashchange', switchTab, false);
+  })();
+  </script><!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head><body class="is-2-column"><nav class="navbar navbar-main"><div class="container navbar-container"><div class="navbar-brand justify-content-center"><a class="navbar-item navbar-logo" href="/"><img src="/img/logo.svg" alt="Blog" height="28"></a></div><div class="navbar-menu"><div class="navbar-start"><a class="navbar-item" href="/">Home</a><a class="navbar-item is-active" href="/archives">Archives</a><a class="navbar-item" href="/categories">Categories</a><a class="navbar-item" href="/tags">Tags</a><a class="navbar-item" href="/about">About</a></div><div class="navbar-end"><a class="navbar-item" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a><a class="navbar-item search" title="Search" href="javascript:;"><i class="fas fa-search"></i></a></div></div></div></nav><section class="section"><div class="container"><div class="columns"><div class="column order-2 column-main is-8-tablet is-8-desktop is-8-widescreen"><div class="card"><div class="card-content"><h3 class="tag is-primary">2022</h3><div class="timeline"><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-08-25T17:59:24.000Z">2022-08-26</time></p><p class="title"><a href="/2022/08/26/%E8%87%B4%E6%A9%A1%E6%A0%91/">致橡树</a></p><p class="categories"><a href="/categories/%E4%B8%AA%E4%BA%BA/">个人</a></p></div></article></div></div></div></div><div class="column column-left is-4-tablet is-4-desktop is-4-widescreen  order-1"><div class="card widget" data-type="profile"><div class="card-content"><nav class="level"><div class="level-item has-text-centered flex-shrink-1"><div><figure class="image is-128x128 mx-auto mb-2"><img class="avatar" src="/img/avatar.png" alt="Your name"></figure><p class="title is-size-4 is-block" style="line-height:inherit;">Your name</p><p class="is-size-6 is-block">Your title</p><p class="is-size-6 is-flex justify-content-center"><i class="fas fa-map-marker-alt mr-1"></i><span>Your location</span></p></div></div></nav><nav class="level is-mobile"><div class="level-item has-text-centered is-marginless"><div><p class="heading">Post</p><a href="/archives"><p class="title">1</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Category</p><a href="/categories"><p class="title">1</p></a></div></div><div class="level-item has-text-centered is-marginless"><div><p class="heading">Tags</p><a href="/tags"><p class="title">3</p></a></div></div></nav><div class="level"><a class="level-item button is-primary is-rounded" href="https://github.com/ppoffice" target="_blank" rel="noopener">Follow</a></div><div class="level is-mobile is-multiline"><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Github" href="https://github.com/ppoffice"><i class="fab fa-github"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Facebook" href="https://facebook.com"><i class="fab fa-facebook"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Twitter" href="https://twitter.com"><i class="fab fa-twitter"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="Dribbble" href="https://dribbble.com"><i class="fab fa-dribbble"></i></a><a class="level-item button is-transparent is-marginless" target="_blank" rel="noopener" title="RSS" href="/"><i class="fas fa-rss"></i></a></div></div></div><!--!--><div class="card widget" data-type="links"><div class="card-content"><div class="menu"><h3 class="menu-label">Links</h3><ul class="menu-list"><li><a class="level is-mobile" href="https://hexo.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Hexo</span></span><span class="level-right"><span class="level-item tag">hexo.io</span></span></a></li><li><a class="level is-mobile" href="https://bulma.io" target="_blank" rel="noopener"><span class="level-left"><span class="level-item">Bulma</span></span><span class="level-right"><span class="level-item tag">bulma.io</span></span></a></li></ul></div></div></div><div class="card widget" data-type="categories"><div class="card-content"><div class="menu"><h3 class="menu-label">Categories</h3><ul class="menu-list"><li><a class="level is-mobile" href="/categories/%E4%B8%AA%E4%BA%BA/"><span class="level-start"><span class="level-item">个人</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="recent-posts"><div class="card-content"><h3 class="menu-label">Recents</h3><article class="media"><div class="media-content"><p class="date"><time dateTime="2022-08-25T17:59:24.000Z">2022-08-26</time></p><p class="title"><a href="/2022/08/26/%E8%87%B4%E6%A9%A1%E6%A0%91/">致橡树</a></p><p class="categories"><a href="/categories/%E4%B8%AA%E4%BA%BA/">个人</a></p></div></article></div></div><div class="card widget" data-type="archives"><div class="card-content"><div class="menu"><h3 class="menu-label">Archives</h3><ul class="menu-list"><li><a class="level is-mobile" href="/archives/2022/08/"><span class="level-start"><span class="level-item">August 2022</span></span><span class="level-end"><span class="level-item tag">1</span></span></a></li></ul></div></div></div><div class="card widget" data-type="tags"><div class="card-content"><div class="menu"><h3 class="menu-label">Tags</h3><div class="field is-grouped is-grouped-multiline"><div class="control"><a class="tags has-addons" href="/tags/home/"><span class="tag">home</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/jiaozi/"><span class="tag">jiaozi</span><span class="tag">1</span></a></div><div class="control"><a class="tags has-addons" href="/tags/liuhan/"><span class="tag">liuhan</span><span class="tag">1</span></a></div></div></div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">Subscribe for updates</h3><form action="https://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open(&#039;https://feedburner.google.com/fb/a/mailverify?uri=&#039;,&#039;popupwindow&#039;,&#039;scrollbars=yes,width=550,height=520&#039;);return true"><input type="hidden" value="" name="uri"><input type="hidden" name="loc" value="en_US"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="Subscribe"></div></div></form></div></div></div><div class="card widget"><div class="card-content"><div class="notification is-danger">You need to set <code>client_id</code> and <code>slot_id</code> to show this AD unit. Please set it in <code>_config.yml</code>.</div></div></div><div class="card widget" data-type="subscribe-email"><div class="card-content"><div class="menu"><h3 class="menu-label">follow.it</h3><form action="" method="post" target="_blank"><div class="field has-addons"><div class="control has-icons-left is-expanded"><input class="input" name="email" type="email" placeholder="Email"><span class="icon is-small is-left"><i class="fas fa-envelope"></i></span></div><div class="control"><input class="button" type="submit" value="Subscribe"></div></div></form></div></div></div></div><!--!--></div></div></section><footer class="footer"><div class="container"><div class="level"><div class="level-start"><a class="footer-logo is-block mb-2" href="/"><img src="/img/logo.svg" alt="Blog" height="28"></a><p class="is-size-7"><span>&copy; 2022 Xu Junjie</span>  Powered by <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a> &amp; <a href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank" rel="noopener">Icarus</a></p></div><div class="level-end"><div class="field has-addons"><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Creative Commons" href="https://creativecommons.org/"><i class="fab fa-creative-commons"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Attribution 4.0 International" href="https://creativecommons.org/licenses/by/4.0/"><i class="fab fa-creative-commons-by"></i></a></p><p class="control"><a class="button is-transparent is-large" target="_blank" rel="noopener" title="Download on GitHub" href="https://github.com/ppoffice/hexo-theme-icarus"><i class="fab fa-github"></i></a></p></div></div></div></div></footer><script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script><script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script><script>moment.locale("en");</script><script>var IcarusThemeSettings = {
+            article: {
+                highlight: {
+                    clipboard: true,
+                    fold: 'unfolded'
+                }
+            }
+        };</script><script src="/js/column.js"></script><script src="/js/animation.js"></script><a id="back-to-top" title="Back to top" href="javascript:;"><i class="fas fa-chevron-up"></i></a><script src="/js/back_to_top.js" defer></script><!--!--><!--!--><!--!--><script src="https://cdn.jsdelivr.net/npm/cookieconsent@3.1.1/build/cookieconsent.min.js" defer></script><script>window.addEventListener("load", () => {
+      window.cookieconsent.initialise({
+        type: "info",
+        theme: "edgeless",
+        static: false,
+        position: "bottom-left",
+        content: {
+          message: "This website uses cookies to improve your experience.",
+          dismiss: "Got it!",
+          allow: "Allow cookies",
+          deny: "Decline",
+          link: "Learn more",
+          policy: "Cookie Policy",
+          href: "https://www.cookiesandyou.com/",
+        },
+        palette: {
+          popup: {
+            background: "#edeff5",
+            text: "#838391"
+          },
+          button: {
+            background: "#4b81e8"
+          },
+        },
+      });
+    });</script><script src="https://cdn.jsdelivr.net/npm/lightgallery@1.10.0/dist/js/lightgallery.min.js" defer></script><script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.8.1/dist/js/jquery.justifiedGallery.min.js" defer></script><script>window.addEventListener("load", () => {
+            if (typeof $.fn.lightGallery === 'function') {
+                $('.article').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof $.fn.justifiedGallery === 'function') {
+                if ($('.justified-gallery > p > .gallery-item').length) {
+                    $('.justified-gallery > p > .gallery-item').unwrap();
+                }
+                $('.justified-gallery').justifiedGallery();
+            }
+        });</script><!--!--><!--!--><!--!--><!--!--><!--!--><script src="/js/main.js" defer></script><div class="searchbox"><div class="searchbox-container"><div class="searchbox-header"><div class="searchbox-input-container"><input class="searchbox-input" type="text" placeholder="Type something..."></div><a class="searchbox-close" href="javascript:;">×</a></div><div class="searchbox-body"></div></div></div><script src="/js/insight.js" defer></script><script>document.addEventListener('DOMContentLoaded', function () {
+            loadInsight({"contentUrl":"/content.json"}, {"hint":"Type something...","untitled":"(Untitled)","posts":"Posts","pages":"Pages","categories":"Categories","tags":"Tags"});
+        });</script></body></html>
