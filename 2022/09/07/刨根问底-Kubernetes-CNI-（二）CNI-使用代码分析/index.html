@@ -21,15 +21,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="概述本文通过在 kubernetes 环境中 kubelet 通过 cri （container runtime interface）规范使用 containerd 去调取 CNI 进行 pod 网络配置来描述 conatainerd 版本: v1.6.8cni: kube-ovn: v1.11.0kubernetes: v1.23.6  环境中是 kube-ovn 做为 cni，所以从 kube">
+    <meta name="description" content="# 概述 本文通过在 kubernetes 环境中 kubelet 通过 cri （container runtime interface）规范使用 containerd 去调取 CNI 进行 pod 网络配置来描述  conatainerd 版本: v1.6.8 cni: kube-ovn: v1.11.0 kubernetes: v1.23.6 &gt; 环境中是 kube-ovn 做为 cni，所">
 <meta property="og:type" content="article">
 <meta property="og:title" content="刨根问底 Kubernetes -- CNI （二）CNI 使用代码分析">
 <meta property="og:url" content="http://example.com/2022/09/07/%E5%88%A8%E6%A0%B9%E9%97%AE%E5%BA%95-Kubernetes-CNI-%EF%BC%88%E4%BA%8C%EF%BC%89CNI-%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/index.html">
 <meta property="og:site_name" content="XuJunjie&#39;s Blog">
-<meta property="og:description" content="概述本文通过在 kubernetes 环境中 kubelet 通过 cri （container runtime interface）规范使用 containerd 去调取 CNI 进行 pod 网络配置来描述 conatainerd 版本: v1.6.8cni: kube-ovn: v1.11.0kubernetes: v1.23.6  环境中是 kube-ovn 做为 cni，所以从 kube">
+<meta property="og:description" content="# 概述 本文通过在 kubernetes 环境中 kubelet 通过 cri （container runtime interface）规范使用 containerd 去调取 CNI 进行 pod 网络配置来描述  conatainerd 版本: v1.6.8 cni: kube-ovn: v1.11.0 kubernetes: v1.23.6 &gt; 环境中是 kube-ovn 做为 cni，所">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-09-06T16:27:54.000Z">
-<meta property="article:modified_time" content="2022-09-08T01:45:39.269Z">
+<meta property="article:modified_time" content="2022-11-17T07:49:58.390Z">
 <meta property="article:author" content="Xu Junjie">
 <meta property="article:tag" content="Kubernetes">
 <meta property="article:tag" content="CNI">
@@ -87,7 +87,7 @@
 
 
 <nav class="site-nav">
-  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签<span class="badge">6</span></a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类<span class="badge">3</span></a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档<span class="badge">5</span></a></li>
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>首页</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>关于</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>标签</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>分类</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>归档</a></li>
   </ul>
 </nav>
 
@@ -105,7 +105,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+    <div class="sidebar-inner sidebar-overview-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -118,7 +118,6 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#containerd-%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90"><span class="nav-number">2.</span> <span class="nav-text">containerd 代码分析</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -131,13 +130,14 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
+          <a href="/categories/">
         <span class="site-state-item-count">3</span>
-        <span class="site-state-item-name">分类</span>
+        <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
@@ -216,7 +216,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-09-08 09:45:39" itemprop="dateModified" datetime="2022-09-08T09:45:39+08:00">2022-09-08</time>
+      <time title="修改时间：2022-11-17 15:49:58" itemprop="dateModified" datetime="2022-11-17T15:49:58+08:00">2022-11-17</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -238,19 +238,41 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>本文通过在 kubernetes 环境中 kubelet 通过 cri （container runtime interface）规范使用 containerd 去调取 CNI 进行 pod 网络配置来描述</p>
-<p>conatainerd 版本: v1.6.8<br>cni: kube-ovn: v1.11.0<br>kubernetes: v1.23.6</p>
-<blockquote>
-<p>环境中是 kube-ovn 做为 cni，所以从 kube-ovn 的环境讲起</p>
-</blockquote>
-<p>架构如封面图所示<br>CNI 的工作是由 kubelet 调取 containerd cri plugin 开始的，下面介绍具体的代码实现</p>
+        # 概述
+本文通过在 kubernetes 环境中 kubelet 通过 cri （container runtime interface）规范使用 containerd 去调取 CNI 进行 pod 网络配置来描述
+
+conatainerd 版本: v1.6.8
+cni: kube-ovn: v1.11.0
+kubernetes: v1.23.6
+> 环境中是 kube-ovn 做为 cni，所以从 kube-ovn 的环境讲起
+
+架构如图所示
+![cri](/img/containerd_cri_architecture.png)
+
+CNI 的工作是由 kubelet 调取 containerd cri plugin 开始的，下面介绍具体的代码实现
+
 <span id="more"></span>
 
-<h1 id="containerd-代码分析"><a href="#containerd-代码分析" class="headerlink" title="containerd 代码分析"></a>containerd 代码分析</h1><p>pkg&#x2F;cri&#x2F;server&#x2F;sandbox_run.go L127 </p>
+# containerd 代码分析
+在初始化时加载了 CNI 的配置, 默认配置从 `/etc/cni/net.d/` 下读取；然后加载不同的 runtime，如果 runtime 下有指定 cni 配置路径，则也会加载。
+pkg/cri/server/service_linux.go
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *criService)</span></span> initPlatform() (err <span class="type">error</span>) &#123;</span><br><span class="line">    pluginDirs := <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span>&#123;</span><br><span class="line">		defaultNetworkPlugin: c.config.NetworkPluginConfDir,</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> name, conf := <span class="keyword">range</span> c.config.Runtimes &#123;</span><br><span class="line">		<span class="keyword">if</span> conf.NetworkPluginConfDir != <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">			pluginDirs[name] = conf.NetworkPluginConfDir</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	c.netPlugin = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">string</span>]cni.CNI)</span><br><span class="line">	<span class="keyword">for</span> name, dir := <span class="keyword">range</span> pluginDirs &#123;</span><br><span class="line">		max := c.config.NetworkPluginMaxConfNum</span><br><span class="line">		<span class="keyword">if</span> name != defaultNetworkPlugin &#123;</span><br><span class="line">			<span class="keyword">if</span> m := c.config.Runtimes[name].NetworkPluginMaxConfNum; m != <span class="number">0</span> &#123;</span><br><span class="line">				max = m</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// Pod needs to attach to at least loopback network and a non host network,</span></span><br><span class="line">		<span class="comment">// hence networkAttachCount is 2. If there are more network configs the</span></span><br><span class="line">		<span class="comment">// pod will be attached to all the networks but we will only use the ip</span></span><br><span class="line">		<span class="comment">// of the default network interface as the pod IP.</span></span><br><span class="line">		i, err := cni.New(cni.WithMinNetworkCount(networkAttachCount),</span><br><span class="line">			cni.WithPluginConfDir(dir),</span><br><span class="line">			cni.WithPluginMaxConfNum(max),</span><br><span class="line">			cni.WithPluginDir([]<span class="type">string</span>&#123;c.config.NetworkPluginBinDir&#125;))</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> fmt.Errorf(<span class="string">&quot;failed to initialize cni: %w&quot;</span>, err)</span><br><span class="line">		&#125;</span><br><span class="line">		c.netPlugin[name] = i</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+RunPodSandbox 在创建 netNS 后会调用 setupPodNetwork。
+
+pkg/cri/server/sandbox_run.go L127 
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *criService)</span></span> RunPodSandbox(ctx context.Context, r *runtime.RunPodSandboxRequest) (_ *runtime.RunPodSandboxResponse, retErr <span class="type">error</span>) &#123;</span><br><span class="line">...</span><br><span class="line"></span><br><span class="line">	<span class="keyword">if</span> podNetwork &#123;</span><br><span class="line">		netStart := time.Now()</span><br><span class="line">		<span class="keyword">var</span> netnsMountDir = <span class="string">&quot;/var/run/netns&quot;</span></span><br><span class="line">		<span class="keyword">if</span> c.config.NetNSMountsUnderStateDir &#123;</span><br><span class="line">			netnsMountDir = filepath.Join(c.config.StateDir, <span class="string">&quot;netns&quot;</span>)</span><br><span class="line">		&#125;</span><br><span class="line">        <span class="comment">// 创建新的 netNS, 默认路径是在 /var/run/netns 路径下</span></span><br><span class="line">        <span class="comment">// 1. 生成 16 位随机数, 并生成 cni-xx-xx; 2. nsPath 为 /var/run/netns/cni-xx-xx;</span></span><br><span class="line">        <span class="comment">// 3. 利用 os.OpenFile 创建路径; 4. containerd 起 goroutine mount</span></span><br><span class="line">		sandbox.NetNS, err = netns.NewNetNS(netnsMountDir)</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">nil</span>, fmt.Errorf(<span class="string">&quot;failed to create network namespace for sandbox %q: %w&quot;</span>, id, err)</span><br><span class="line">		&#125;</span><br><span class="line">		sandbox.NetNSPath = sandbox.NetNS.GetPath()</span><br><span class="line">		<span class="keyword">defer</span> <span class="function"><span class="keyword">func</span><span class="params">()</span></span> &#123;</span><br><span class="line">			<span class="keyword">if</span> retErr != <span class="literal">nil</span> &#123;</span><br><span class="line">				deferCtx, deferCancel := ctrdutil.DeferContext()</span><br><span class="line">				<span class="keyword">defer</span> deferCancel()</span><br><span class="line">				<span class="comment">// Teardown network if an error is returned.</span></span><br><span class="line">				<span class="keyword">if</span> err := c.teardownPodNetwork(deferCtx, sandbox); err != <span class="literal">nil</span> &#123;</span><br><span class="line">					log.G(ctx).WithError(err).Errorf(<span class="string">&quot;Failed to destroy network for sandbox %q&quot;</span>, id)</span><br><span class="line">				&#125;</span><br><span class="line"></span><br><span class="line">				<span class="keyword">if</span> err := sandbox.NetNS.Remove(); err != <span class="literal">nil</span> &#123;</span><br><span class="line">					log.G(ctx).WithError(err).Errorf(<span class="string">&quot;Failed to remove network namespace %s for sandbox %q&quot;</span>, sandbox.NetNSPath, id)</span><br><span class="line">				&#125;</span><br><span class="line">				sandbox.NetNSPath = <span class="string">&quot;&quot;</span></span><br><span class="line">			&#125;</span><br><span class="line">		&#125;()</span><br><span class="line"></span><br><span class="line">        <span class="comment">// setupPodNetwork</span></span><br><span class="line">		<span class="keyword">if</span> err := c.setupPodNetwork(ctx, &amp;sandbox); err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> <span class="literal">nil</span>, fmt.Errorf(<span class="string">&quot;failed to setup network for sandbox %q: %w&quot;</span>, id, err)</span><br><span class="line">		&#125;</span><br><span class="line">		sandboxCreateNetworkTimer.UpdateSince(netStart)</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
 
-<p>pkg&#x2F;cri&#x2F;server&#x2F;sandbox_run.go L377</p>
+netPlugin.Setup 最终调用 AddNetworkList CNI 插件接口为 sandbox 配置网络；result 为 CNI 返回结果。
+pkg/cri/server/sandbox_run.go L377
 <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// setupPodNetwork setups up the network for a pod</span></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *criService)</span></span> setupPodNetwork(ctx context.Context, sandbox *sandboxstore.Sandbox) <span class="type">error</span> &#123;</span><br><span class="line">	<span class="keyword">var</span> (</span><br><span class="line">		id        = sandbox.ID</span><br><span class="line">		config    = sandbox.Config</span><br><span class="line">		path      = sandbox.NetNSPath</span><br><span class="line">        <span class="comment">// runtimehandler(kata 或 空), 通常获取 default</span></span><br><span class="line">		netPlugin = c.getNetworkPlugin(sandbox.RuntimeHandler)</span><br><span class="line">	)</span><br><span class="line">    <span class="comment">// netPlugin</span></span><br><span class="line">	<span class="keyword">if</span> netPlugin == <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> errors.New(<span class="string">&quot;cni config not initialized&quot;</span>)</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	opts, err := cniNamespaceOpts(id, config)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> fmt.Errorf(<span class="string">&quot;get cni namespace options: %w&quot;</span>, err)</span><br><span class="line">	&#125;</span><br><span class="line">	log.G(ctx).WithField(<span class="string">&quot;podsandboxid&quot;</span>, id).Debugf(<span class="string">&quot;begin cni setup&quot;</span>)</span><br><span class="line">	result, err := netPlugin.Setup(ctx, id, path, opts...)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> err</span><br><span class="line">	&#125;</span><br><span class="line">	logDebugCNIResult(ctx, id, result)</span><br><span class="line">	<span class="comment">// Check if the default interface has IP config</span></span><br><span class="line">	<span class="keyword">if</span> configs, ok := result.Interfaces[defaultIfName]; ok &amp;&amp; <span class="built_in">len</span>(configs.IPConfigs) &gt; <span class="number">0</span> &#123;</span><br><span class="line">		sandbox.IP, sandbox.AdditionalIPs = selectPodIPs(ctx, configs.IPConfigs, c.config.IPPreference)</span><br><span class="line">		sandbox.CNIResult = result</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span></span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">return</span> fmt.Errorf(<span class="string">&quot;failed to find network info for sandbox %q&quot;</span>, id)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+Setup 生成 环境变量，然后调用 查看 plugin 里的 type，对应运行 CNI 的 二进制文件
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *CNIConfig)</span></span> addNetwork(ctx context.Context, name, cniVersion <span class="type">string</span>, net *NetworkConfig, prevResult types.Result, rt *RuntimeConf) (types.Result, <span class="type">error</span>) &#123;</span><br><span class="line">    ......</span><br><span class="line">	newConf, err := buildOneConfig(name, cniVersion, net, prevResult, rt)</span><br><span class="line">	<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">		<span class="keyword">return</span> <span class="literal">nil</span>, err</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> invoke.ExecPluginWithResult(ctx, pluginPath, newConf.Bytes, c.args(<span class="string">&quot;ADD&quot;</span>, rt), c.exec)</span><br></pre></td></tr></table></figure>
+如 kube-ovn 的 配置
+<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$ cat <span class="regexp">/etc/</span>cni<span class="regexp">/net.d/</span><span class="number">01</span>-kube-ovn.conflist </span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;name&quot;</span>:<span class="string">&quot;kube-ovn&quot;</span>,</span><br><span class="line">    <span class="string">&quot;cniVersion&quot;</span>:<span class="string">&quot;0.3.1&quot;</span>,</span><br><span class="line">    <span class="string">&quot;plugins&quot;</span>:[</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">&quot;type&quot;</span>:<span class="string">&quot;kube-ovn&quot;</span>,</span><br><span class="line">            <span class="string">&quot;server_socket&quot;</span>:<span class="string">&quot;/run/openvswitch/kube-ovn-daemon.sock&quot;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">&quot;type&quot;</span>:<span class="string">&quot;portmap&quot;</span>,</span><br><span class="line">            <span class="string">&quot;capabilities&quot;</span>:&#123;</span><br><span class="line">                <span class="string">&quot;portMappings&quot;</span>:<span class="keyword">true</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
     </div>
 
     
@@ -267,8 +289,8 @@
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2022/09/07/%E5%88%A8%E6%A0%B9%E9%97%AE%E5%BA%95-Kubernetes-CNI-%EF%BC%88%E4%B8%80%EF%BC%89CNI-%E7%9B%AE%E5%BD%95/" rel="prev" title="刨根问底 Kubernetes -- CNI （一）CNI 目录">
-                  <i class="fa fa-chevron-left"></i> 刨根问底 Kubernetes -- CNI （一）CNI 目录
+                <a href="/2022/09/07/%E5%88%A8%E6%A0%B9%E9%97%AE%E5%BA%95%20Kubernetes-CNI-%EF%BC%88%E4%B8%89%EF%BC%89Multus-CNI/" rel="prev" title="刨根问底 Kubernetes -- CNI （三）Multus">
+                  <i class="fa fa-chevron-left"></i> 刨根问底 Kubernetes -- CNI （三）Multus
                 </a>
             </div>
             <div class="post-nav-item">
