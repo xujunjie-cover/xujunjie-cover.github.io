@@ -21,12 +21,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="CNI 概述The Container Network InterfaceCNI（容器网络接口）是一个云原生计算基础项目，由一个规范和库组成，用于编写用于在 Linux 容器中配置网络接口的插件，以及许多受支持的插件。CNI 只专注于容器的网络连接，并在删除容器时删除分配的资源。由于这种专注，CNI 得到了广泛的支持，并且规范易于实现。 除了规范之外，CNI 仓库还包含用于将 CNI 集成到应用程">
+    <meta name="description" content="CNI 概述 The Container Network Interface CNI（容器网络接口）是一个云原生计算基础项目，由一个规范和库组成，用于编写用于在 Linux 容器中配置网络接口的插件，以及许多受支持的插件。CNI 只专注于容器的网络连接，并在删除容器时删除分配的资源。由于这种专注，CNI 得到了广泛的支持，并且规范易于实现。 除了规范之外，CNI 仓库还包含用于将 CN">
 <meta property="og:type" content="article">
 <meta property="og:title" content="刨根问底 Kubernetes -- CNI （一）CNI 目录">
 <meta property="og:url" content="http://example.com/2022/09/07/%E5%88%A8%E6%A0%B9%E9%97%AE%E5%BA%95-Kubernetes-CNI-%EF%BC%88%E4%B8%80%EF%BC%89CNI-%E7%9B%AE%E5%BD%95/index.html">
 <meta property="og:site_name" content="XuJunjie&#39;s Blog">
-<meta property="og:description" content="CNI 概述The Container Network InterfaceCNI（容器网络接口）是一个云原生计算基础项目，由一个规范和库组成，用于编写用于在 Linux 容器中配置网络接口的插件，以及许多受支持的插件。CNI 只专注于容器的网络连接，并在删除容器时删除分配的资源。由于这种专注，CNI 得到了广泛的支持，并且规范易于实现。 除了规范之外，CNI 仓库还包含用于将 CNI 集成到应用程">
+<meta property="og:description" content="CNI 概述 The Container Network Interface CNI（容器网络接口）是一个云原生计算基础项目，由一个规范和库组成，用于编写用于在 Linux 容器中配置网络接口的插件，以及许多受支持的插件。CNI 只专注于容器的网络连接，并在删除容器时删除分配的资源。由于这种专注，CNI 得到了广泛的支持，并且规范易于实现。 除了规范之外，CNI 仓库还包含用于将 CN">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/cni2.png">
 <meta property="article:published_time" content="2022-09-06T16:06:13.000Z">
@@ -120,7 +120,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CNI-%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">CNI 概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CNI-%E7%AE%80%E4%BB%8B"><span class="nav-number">2.</span> <span class="nav-text">CNI 简介</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#cni-%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">CNI 概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#cni-%E7%AE%80%E4%BB%8B"><span class="nav-number">2.</span> <span class="nav-text">CNI 简介</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -235,26 +235,38 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="CNI-概述"><a href="#CNI-概述" class="headerlink" title="CNI 概述"></a>CNI 概述</h1><p>The Container Network Interface<br>CNI（容器网络接口）是一个云原生计算基础项目，由一个规范和库组成，用于编写用于在 Linux 容器中配置网络接口的插件，以及许多受支持的插件。CNI 只专注于容器的网络连接，并在删除容器时删除分配的资源。由于这种专注，CNI 得到了广泛的支持，并且规范易于实现。</p>
-<p>除了规范之外，CNI 仓库还包含用于将 CNI 集成到应用程序中的库的 Go 源代码，以及用于执行 CNI 插件的示例命令行工具。一个单独的仓库包含参考插件和用于创建新插件的模板。</p>
-<p>模板代码可以直接为现有的容器网络项目创建  CNI 插件。CNI 也为从头开始创建新的容器网络项目提供了一个良好的框架。</p>
+        <h1 id="cni-概述">CNI 概述</h1>
+<p>The Container Network Interface
+CNI（容器网络接口）是一个云原生计算基础项目，由一个规范和库组成，用于编写用于在
+Linux 容器中配置网络接口的插件，以及许多受支持的插件。CNI
+只专注于容器的网络连接，并在删除容器时删除分配的资源。由于这种专注，CNI
+得到了广泛的支持，并且规范易于实现。</p>
+<p>除了规范之外，CNI 仓库还包含用于将 CNI 集成到应用程序中的库的 Go
+源代码，以及用于执行 CNI
+插件的示例命令行工具。一个单独的仓库包含参考插件和用于创建新插件的模板。</p>
+<p>模板代码可以直接为现有的容器网络项目创建 CNI 插件。CNI
+也为从头开始创建新的容器网络项目提供了一个良好的框架。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/containernetworking/plugins">CNI plugin</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/containernetworking/plugins">CNI
+plugin</a></li>
 <li><a target="_blank" rel="noopener" href="https://github.com/containernetworking/cni">CNI</a></li>
 </ul>
 <p>在网络插件和容器执行之间定义一个公共接口是谨慎的：所以提出了此规范。</p>
 <span id="more"></span>
-
-<h1 id="CNI-简介"><a href="#CNI-简介" class="headerlink" title="CNI 简介"></a>CNI 简介</h1><p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6986495816949039141">CNI 简介</a></p>
-<p>关于 CNI 比较重要的几点如下：</p>
-<ul>
-<li>符合 CNI 标准的插件必须是二进制文件（可执行文件），并不是守护进程。运行时要有 root 权限</li>
-<li>网络定义或配置以 json 文件形式存储。这些文件通过标准输入方式（stdin）传给二进制插件</li>
-<li>当容器创建时，相关信息以环境变量的方式传递给插件。但是对于最新的 CNI，也可以以 json信息通过标准输入的方式发送</li>
-<li>CNI 二进制插件 目前只允许以上两种方式的输入</li>
-<li>对于 CNI 插件，容器就是linux的网络名命空间</li>
-</ul>
-<p><img src="/img/cni2.png" alt="cni2"></p>
+<h1 id="cni-简介">CNI 简介</h1>
+<p><a target="_blank" rel="noopener" href="https://juejin.cn/post/6986495816949039141">CNI 简介</a></p>
+<p>关于 CNI 比较重要的几点如下： - 符合 CNI
+标准的插件必须是二进制文件（可执行文件），并不是守护进程。运行时要有
+root 权限 - 网络定义或配置以 json
+文件形式存储。这些文件通过标准输入方式（stdin）传给二进制插件 -
+当容器创建时，相关信息以环境变量的方式传递给插件。但是对于最新的
+CNI，也可以以 json信息通过标准输入的方式发送 - CNI 二进制插件
+目前只允许以上两种方式的输入 - 对于 CNI
+插件，容器就是linux的网络名命空间</p>
+<figure>
+<img src="/img/cni2.png" alt="cni2" />
+<figcaption aria-hidden="true">cni2</figcaption>
+</figure>
 
     </div>
 
@@ -277,8 +289,8 @@
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2022/09/07/%E5%88%A8%E6%A0%B9%E9%97%AE%E5%BA%95%20Kubernetes-CNI-%EF%BC%88%E4%B8%89%EF%BC%89Multus-CNI/" rel="next" title="刨根问底 Kubernetes -- CNI （三）Multus">
-                  刨根问底 Kubernetes -- CNI （三）Multus <i class="fa fa-chevron-right"></i>
+                <a href="/2022/09/07/%E5%88%A8%E6%A0%B9%E9%97%AE%E5%BA%95-Kubernetes-CNI-%EF%BC%88%E4%BA%8C%EF%BC%89CNI-%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/" rel="next" title="刨根问底 Kubernetes -- CNI （二）CNI 使用代码分析">
+                  刨根问底 Kubernetes -- CNI （二）CNI 使用代码分析 <i class="fa fa-chevron-right"></i>
                 </a>
             </div>
           </div>

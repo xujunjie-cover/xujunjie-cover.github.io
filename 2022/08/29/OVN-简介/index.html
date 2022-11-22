@@ -21,12 +21,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="OVN 介绍Open vSwitch（OVS）是一款开源的“虚拟交换机”，控制协议方面它不但支持 OpenFlow 的所有特性而且扩展了部分 OpenFlow 的功能；Overlay 协议方面它支持 GRE, VXLAN, STT, Geneve 四种主流Overlay 数据包。OVS 已经是数据平面的事实标准了。">
+    <meta name="description" content="OVN 介绍 Open vSwitch（OVS）是一款开源的“虚拟交换机”，控制协议方面它不但支持 OpenFlow 的所有特性而且扩展了部分 OpenFlow 的功能；Overlay 协议方面它支持 GRE, VXLAN, STT, Geneve 四种主流Overlay 数据包。OVS 已经是数据平面的事实标准了。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OVN 简介">
 <meta property="og:url" content="http://example.com/2022/08/29/OVN-%E7%AE%80%E4%BB%8B/index.html">
 <meta property="og:site_name" content="XuJunjie&#39;s Blog">
-<meta property="og:description" content="OVN 介绍Open vSwitch（OVS）是一款开源的“虚拟交换机”，控制协议方面它不但支持 OpenFlow 的所有特性而且扩展了部分 OpenFlow 的功能；Overlay 协议方面它支持 GRE, VXLAN, STT, Geneve 四种主流Overlay 数据包。OVS 已经是数据平面的事实标准了。">
+<meta property="og:description" content="OVN 介绍 Open vSwitch（OVS）是一款开源的“虚拟交换机”，控制协议方面它不但支持 OpenFlow 的所有特性而且扩展了部分 OpenFlow 的功能；Overlay 协议方面它支持 GRE, VXLAN, STT, Geneve 四种主流Overlay 数据包。OVS 已经是数据平面的事实标准了。">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2022-08-28T16:38:38.000Z">
 <meta property="article:modified_time" content="2022-08-29T02:03:40.560Z">
@@ -117,7 +117,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#OVN-%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">OVN 介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OVN%E7%9A%84%E6%9E%B6%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">OVN的架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OVN-%E5%BA%94%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">OVN 应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#OVN-%E4%BF%A1%E6%81%AF%E6%B5%81"><span class="nav-number">3.1.</span> <span class="nav-text">OVN 信息流</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE"><span class="nav-number">3.1.1.</span> <span class="nav-text">配置数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E4%BF%A1%E6%81%AF"><span class="nav-number">3.1.2.</span> <span class="nav-text">状态信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Chassis-%E8%AE%BE%E7%BD%AE"><span class="nav-number">3.2.</span> <span class="nav-text">Chassis 设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E7%BD%91%E7%BB%9C"><span class="nav-number">3.3.</span> <span class="nav-text">逻辑网络</span></a></li></ol></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#ovn-%E4%BB%8B%E7%BB%8D"><span class="nav-number">1.</span> <span class="nav-text">OVN 介绍</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ovn%E7%9A%84%E6%9E%B6%E6%9E%84"><span class="nav-number">2.</span> <span class="nav-text">OVN的架构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#ovn-%E5%BA%94%E7%94%A8"><span class="nav-number">3.</span> <span class="nav-text">OVN 应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#ovn-%E4%BF%A1%E6%81%AF%E6%B5%81"><span class="nav-number">3.1.</span> <span class="nav-text">OVN 信息流</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%85%8D%E7%BD%AE%E6%95%B0%E6%8D%AE"><span class="nav-number">3.1.1.</span> <span class="nav-text">配置数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%8A%B6%E6%80%81%E4%BF%A1%E6%81%AF"><span class="nav-number">3.1.2.</span> <span class="nav-text">状态信息</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#chassis-%E8%AE%BE%E7%BD%AE"><span class="nav-number">3.2.</span> <span class="nav-text">Chassis 设置</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%80%BB%E8%BE%91%E7%BD%91%E7%BB%9C"><span class="nav-number">3.3.</span> <span class="nav-text">逻辑网络</span></a></li></ol></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -232,56 +232,114 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="OVN-介绍"><a href="#OVN-介绍" class="headerlink" title="OVN 介绍"></a>OVN 介绍</h1><p>Open vSwitch（OVS）是一款开源的“虚拟交换机”，控制协议方面它不但支持 OpenFlow 的所有特性而且扩展了部分 OpenFlow 的功能；Overlay 协议方面它支持 GRE, VXLAN, STT, Geneve 四种主流Overlay 数据包。OVS 已经是数据平面的事实标准了。</p>
+        <h1 id="ovn-介绍">OVN 介绍</h1>
+<p>Open vSwitch（OVS）是一款开源的“虚拟交换机”，控制协议方面它不但支持
+OpenFlow 的所有特性而且扩展了部分 OpenFlow 的功能；Overlay
+协议方面它支持 GRE, VXLAN, STT, Geneve 四种主流Overlay 数据包。OVS
+已经是数据平面的事实标准了。</p>
 <span id="more"></span>
-
-<p>但是长期一来 OVS 都缺乏一个统一的网络模型（Neutron 虽然花费巨大力气实现一个网络模型但是仅仅适用于 OpenStack 而无法用于容器更加无法单独使用），于是在2015年 OVS 社区宣布了一个子项目——Open Virtual Network（OVN）。它旨在为 OVS 提供一个控制平面，通过一个统一的网络模型为容器、虚拟机提供相同的网络服务。</p>
-<p>OVN 提供的是一个轻量级控制器，提供了比 openvSwitch 更高层的抽象，与逻辑路由器和逻辑交换机而不是 flow 一起工作；这个轻量级不但体现在 OVN 本身的代码少（只有几个 C 语言文件，而且代码很少），模型简单（虽然简单但是很丰富，更懂得利用 OVS 本身的特性）而且它的流表设计（Pipeline）也容易理解。</p>
-<p>OVN 是一系列守护程序，它们将虚拟网络配置转换为 OpenFlow，并将其安装到 openvSwitch 中；</p>
-<p><strong>OVN 的功能</strong></p>
-<ul>
-<li>L2功能，分布式逻辑交换机</li>
-<li>L3功能，分布式逻辑交换机</li>
-<li>ACL，访问控制列表</li>
-<li>DHCP，DNS</li>
-<li>NAT，SNAT、DNAT都支持</li>
-<li>Load Balancer，支持面向内部的负载均衡和提供外部访问的负载均衡</li>
-</ul>
-<h1 id="OVN的架构"><a href="#OVN的架构" class="headerlink" title="OVN的架构"></a>OVN的架构</h1><figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">                                  CMS</span><br><span class="line">                                   |<span class="string"></span></span><br><span class="line"><span class="string">                                   </span>|</span><br><span class="line">                       +-----------|<span class="string">-----------+</span></span><br><span class="line"><span class="string">                       </span>|<span class="string">           </span>|<span class="string">           </span>|</span><br><span class="line">                       |<span class="string">     OVN/CMS Plugin    </span>|</span><br><span class="line">                       |<span class="string">           </span>|<span class="string">           </span>|</span><br><span class="line">                       |<span class="string">           </span>|<span class="string">           </span>|</span><br><span class="line">                       |<span class="string">   OVN Northbound DB   </span>|</span><br><span class="line">                       |<span class="string">           </span>|<span class="string">           </span>|</span><br><span class="line">                       |<span class="string">           </span>|<span class="string">           </span>|</span><br><span class="line">                       |<span class="string">       ovn-northd      </span>|</span><br><span class="line">                       |<span class="string">           </span>|<span class="string">           </span>|</span><br><span class="line">                       +-----------|<span class="string">-----------+</span></span><br><span class="line"><span class="string">                                   </span>|</span><br><span class="line">                                   |<span class="string"></span></span><br><span class="line"><span class="string">                         +-------------------+</span></span><br><span class="line"><span class="string">                         </span>|<span class="string"> OVN Southbound DB </span>|</span><br><span class="line">                         +-------------------+</span><br><span class="line">                                   |<span class="string"></span></span><br><span class="line"><span class="string">                                   </span>|</span><br><span class="line">                +------------------+------------------+</span><br><span class="line">                |<span class="string">                  </span>|<span class="string">                  </span>|</span><br><span class="line">  HV 1          |<span class="string">                  </span>|<span class="string">    HV n          </span>|</span><br><span class="line">+---------------|<span class="string">---------------+  .  +---------------</span>|<span class="string">---------------+</span></span><br><span class="line"><span class="string"></span>|<span class="string">               </span>|<span class="string">               </span>|<span class="string">  .  </span>|<span class="string">               </span>|<span class="string">               </span>|</span><br><span class="line">|<span class="string">        ovn-controller         </span>|<span class="string">  .  </span>|<span class="string">        ovn-controller         </span>|</span><br><span class="line">|<span class="string">         </span>|<span class="string">          </span>|<span class="string">          </span>|<span class="string">  .  </span>|<span class="string">         </span>|<span class="string">          </span>|<span class="string">          </span>|</span><br><span class="line">|<span class="string">         </span>|<span class="string">          </span>|<span class="string">          </span>|<span class="string">     </span>|<span class="string">         </span>|<span class="string">          </span>|<span class="string">          </span>|</span><br><span class="line">|<span class="string">  ovs-vswitchd   ovsdb-server  </span>|<span class="string">     </span>|<span class="string">  ovs-vswitchd   ovsdb-server  </span>|</span><br><span class="line">|<span class="string">                               </span>|<span class="string">     </span>|<span class="string">                               </span>|</span><br><span class="line">+-------------------------------+     +-------------------------------+</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
+<p>但是长期一来 OVS 都缺乏一个统一的网络模型（Neutron
+虽然花费巨大力气实现一个网络模型但是仅仅适用于 OpenStack
+而无法用于容器更加无法单独使用），于是在2015年 OVS
+社区宣布了一个子项目——Open Virtual Network（OVN）。它旨在为 OVS
+提供一个控制平面，通过一个统一的网络模型为容器、虚拟机提供相同的网络服务。</p>
+<p>OVN 提供的是一个轻量级控制器，提供了比 openvSwitch
+更高层的抽象，与逻辑路由器和逻辑交换机而不是 flow
+一起工作；这个轻量级不但体现在 OVN 本身的代码少（只有几个 C
+语言文件，而且代码很少），模型简单（虽然简单但是很丰富，更懂得利用 OVS
+本身的特性）而且它的流表设计（Pipeline）也容易理解。</p>
+<p>OVN 是一系列守护程序，它们将虚拟网络配置转换为 OpenFlow，并将其安装到
+openvSwitch 中；</p>
+<p><strong>OVN 的功能</strong> - L2功能，分布式逻辑交换机 -
+L3功能，分布式逻辑交换机 - ACL，访问控制列表 - DHCP，DNS -
+NAT，SNAT、DNAT都支持 - Load
+Balancer，支持面向内部的负载均衡和提供外部访问的负载均衡</p>
+<h1 id="ovn的架构">OVN的架构</h1>
+<figure class="highlight gherkin"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">                                  CMS</span><br><span class="line">                                   |<span class="string"></span></span><br><span class="line"><span class="string">                                   </span>|</span><br><span class="line">                       +-----------|<span class="string">-----------+</span></span><br><span class="line"><span class="string">                       </span>|<span class="string">           </span>|<span class="string">           </span>|</span><br><span class="line">                       |<span class="string">     OVN/CMS Plugin    </span>|</span><br><span class="line">                       |<span class="string">           </span>|<span class="string">           </span>|</span><br><span class="line">                       |<span class="string">           </span>|<span class="string">           </span>|</span><br><span class="line">                       |<span class="string">   OVN Northbound DB   </span>|</span><br><span class="line">                       |<span class="string">           </span>|<span class="string">           </span>|</span><br><span class="line">                       |<span class="string">           </span>|<span class="string">           </span>|</span><br><span class="line">                       |<span class="string">       ovn-northd      </span>|</span><br><span class="line">                       |<span class="string">           </span>|<span class="string">           </span>|</span><br><span class="line">                       +-----------|<span class="string">-----------+</span></span><br><span class="line"><span class="string">                                   </span>|</span><br><span class="line">                                   |<span class="string"></span></span><br><span class="line"><span class="string">                         +-------------------+</span></span><br><span class="line"><span class="string">                         </span>|<span class="string"> OVN Southbound DB </span>|</span><br><span class="line">                         +-------------------+</span><br><span class="line">                                   |<span class="string"></span></span><br><span class="line"><span class="string">                                   </span>|</span><br><span class="line">                +------------------+------------------+</span><br><span class="line">                |<span class="string">                  </span>|<span class="string">                  </span>|</span><br><span class="line">  HV 1          |<span class="string">                  </span>|<span class="string">    HV n          </span>|</span><br><span class="line">+---------------|<span class="string">---------------+  .  +---------------</span>|<span class="string">---------------+</span></span><br><span class="line"><span class="string"></span>|<span class="string">               </span>|<span class="string">               </span>|<span class="string">  .  </span>|<span class="string">               </span>|<span class="string">               </span>|</span><br><span class="line">|<span class="string">        ovn-controller         </span>|<span class="string">  .  </span>|<span class="string">        ovn-controller         </span>|</span><br><span class="line">|<span class="string">         </span>|<span class="string">          </span>|<span class="string">          </span>|<span class="string">  .  </span>|<span class="string">         </span>|<span class="string">          </span>|<span class="string">          </span>|</span><br><span class="line">|<span class="string">         </span>|<span class="string">          </span>|<span class="string">          </span>|<span class="string">     </span>|<span class="string">         </span>|<span class="string">          </span>|<span class="string">          </span>|</span><br><span class="line">|<span class="string">  ovs-vswitchd   ovsdb-server  </span>|<span class="string">     </span>|<span class="string">  ovs-vswitchd   ovsdb-server  </span>|</span><br><span class="line">|<span class="string">                               </span>|<span class="string">     </span>|<span class="string">                               </span>|</span><br><span class="line">+-------------------------------+     +-------------------------------+</span><br><span class="line"></span><br></pre></td></tr></table></figure>
 <p><strong>主要组成部分包括</strong>：</p>
 <ul>
-<li>ovn northd，将 CMS 的北向配置转换为南向数据库的逻辑流。连接其上方的 ovn Northbound 数据库和下方的 ovn Southbound 数据库。它将传统网络概念中的逻辑网络配置（取自 OVN 北向数据库）转换为其下方 OVN 南向数据库中的逻辑数据路径流。</li>
-<li>ovn controller，一个在集群中的每个 Hypervisor 上的 OVN agent，北向连接 ovn-southbound 数据库。它将南向数据库中的逻辑流转换为 OpenFlow for Open vSwitch。它还处理某些流量，例如 DHCP 和 DNS。</li>
+<li>ovn northd，将 CMS 的北向配置转换为南向数据库的逻辑流。连接其上方的
+ovn Northbound 数据库和下方的 ovn Southbound
+数据库。它将传统网络概念中的逻辑网络配置（取自 OVN
+北向数据库）转换为其下方 OVN 南向数据库中的逻辑数据路径流。</li>
+<li>ovn controller，一个在集群中的每个 Hypervisor 上的 OVN
+agent，北向连接 ovn-southbound 数据库。它将南向数据库中的逻辑流转换为
+OpenFlow for Open vSwitch。它还处理某些流量，例如 DHCP 和 DNS。</li>
 <li>ovn nbctl，一个用于连接北向数据库的工具。</li>
 <li>ovn sbctl，一个用于连接南向数据库的工具。</li>
-<li>ovn northbound Database， 接收 OVN&#x2F;CMS 插件传递的逻辑网络配置的中间件。数据库模式意味着与 CMS 中使用的概念匹配，它直接支持逻辑交换机、路由器、ACL等概念。</li>
-<li>OVN Southbound Database，包含三种数据：指定如何到达 hypervisor 和其他节点的物理网络（PN）表，用“逻辑数据路径流”描述逻辑网络的逻辑网络（LN）表，“”和将逻辑网络组件的位置链接到物理网络的绑定表。</li>
+<li>ovn northbound Database， 接收 OVN/CMS
+插件传递的逻辑网络配置的中间件。数据库模式意味着与 CMS
+中使用的概念匹配，它直接支持逻辑交换机、路由器、ACL等概念。</li>
+<li>OVN Southbound Database，包含三种数据：指定如何到达 hypervisor
+和其他节点的物理网络（PN）表，用“逻辑数据路径流”描述逻辑网络的逻辑网络（LN）表，“”和将逻辑网络组件的位置链接到物理网络的绑定表。</li>
 </ul>
-<p>OVN 引入了两个全新的 OVSDB，一个叫 Northbound DB（北向数据库，NB），一个叫 Southbound DB（南向数据库，SB）；两个库都可以导出远程接口，允许用户通过 OVSDB 协议对数据库进行操作。</p>
-<p>NB 存放的是我们定义的逻辑交换机、逻辑路由器之类的数据，我们可以通过 ovn 提供的命令行（ovn-nbctl）完成添加、删除、修改、查询等操作；当然可以写代码通过 OVSDB 协议完成类似动作。OVN 的 NB 是面向“上层应用”的或者叫“云管平台（Cloud Management System，CMS）”。</p>
-<p>SB 进程比较特殊它同时接受两边的“写入”，首先是运行在 ovn-host 上的 ovn-controller 启动之后会去主动连接到 ovn-central 节点上的 SB 进程，把自己的 IP 地址（Chassis），本机的 OVS 状态（Datapath_Binding）写入到 SB 数据库中。ovn-controller 还“监听” SB 数据库中流表的变化（Flow）去更新本地的 OVS 数据库 – 流表下发。</p>
-<p>SB 中的流表是由运行在 ovn-central 节点上的 ovn-northd 进程修改的，ovn-northd 会“监听” NB 的改变，把逻辑交换机、路由器的定义转换成流表（Flow）写入到 SB 数据库。</p>
-<p>整个架构非常简单，OVN 仅仅提供了一组网络模型（逻辑交换机、逻辑路由器等），提供了一个OVSDB 数据库用来存放这些模型同时把数据库的访问权限开放给最终用户，让最终用户通过 OVSDB 协议来直接“写入”这些模型（北向）。通过一个叫 ovn-northd 的进程把网络模型转换成流表，放入另一个数据库让 ovn-host 自己来“取”流表（南向），以此完成流表下发。</p>
-<h1 id="OVN-应用"><a href="#OVN-应用" class="headerlink" title="OVN 应用"></a>OVN 应用</h1><h2 id="OVN-信息流"><a href="#OVN-信息流" class="headerlink" title="OVN 信息流"></a>OVN 信息流</h2><h3 id="配置数据"><a href="#配置数据" class="headerlink" title="配置数据"></a>配置数据</h3><p>OVN 中的配置数据从北向南传递，CMS 使用其 OVN&#x2F;CMS 插件通过 northbound 数据库传递 ovn 的逻辑网络配置给 ovn−northd，反过来，ovn−northd 将配置编译为较低级别的形式，并通过 southbound 数据库将其传递给所有 chassis；</p>
-<h3 id="状态信息"><a href="#状态信息" class="headerlink" title="状态信息"></a>状态信息</h3><p>ovn 中的状态信息从南向北传递。OVN 目前只提供几种形式的状态信息。</p>
-<p>首先，ovn−northd 填充 northbound Logical_Switch_Port 表中的 up 表项，如果 southbound port_Binding 表中逻辑端口的 chassis column 为空，则设置为true，这允许CMS检测VM的网络何时出现。</p>
-<p>第二，OVN 向 CMS 反馈其配置的实现情况，配置是否生效，该功能需要 CMS 参与一个序列号协议，工作方式如下：</p>
-<ul>
-<li>当 CMS 更新北向数据库中的配置时，作为同一事务的一部分，它会增加 NB_Global 表中 nb_cfg 列的值。</li>
-<li>当 ovn−northd 根据北向数据库的给定快照更新南向数据库，它将 nb_cfg 从北行 nb_Global 复制到南向数据库 SB_Global 表中，作为同一事务的一部分。</li>
-<li>在 ovn−northd 从南向数据库收到其更改已提交的确认，它将 northbound nb_Global 表中的 sb_cfg 更新为 NB_cfg 版本。</li>
-<li>ovn−controller 进程接收更新的 southbound 数据库和更新的 nb_cfg。此过程反过来会更新 Chassis 的 Open vSwitch 实例中的物理流。当它收到 Open vSwitch 的确认时，物理流更新后，它会在 southbound 数据库中自己的机箱记录中更新 nb_cfg。</li>
-<li>ovn−northd 监视 southbound 数据库中所有 Chassis 记录中的 nb_cfg 列。它跟踪所有记录中的最小值，并将其复制到北行 NB_Global 的 hv_cfg 列中。</li>
-</ul>
-<h2 id="Chassis-设置"><a href="#Chassis-设置" class="headerlink" title="Chassis 设置"></a>Chassis 设置</h2><p>OVN 部署中的每个 Chassis 必须配置一个专用于 OVN 使用的 openvSwitch 网桥，称为集成网桥。系统启动脚本可能会在启动 ovn-controller 之前创建此网桥。如果 ovn-controller 启动时不存在此网桥，将使用下面建议的默认配置自动创建它。集成桥上的端口包括：</p>
-<ul>
-<li>在任何 Chassis 上，OVN 用于维护逻辑网络连接的隧道端口。ovn−controller 添加、更新和删除这些隧道端口。</li>
-<li>openvswitch 本身存在的与 hypervisor 之间的集成工作。</li>
-<li>在网关上，用于逻辑网络连接的物理端口。系统启动脚本在启动 ovn 之前将此端口添加到 ovn−controller。在更复杂的设置中，它可以是另一个网桥的 patch 端口，而不是物理端口。</li>
-</ul>
-<h2 id="逻辑网络"><a href="#逻辑网络" class="headerlink" title="逻辑网络"></a>逻辑网络</h2><p>OVN 中的逻辑网络概念包括逻辑交换机和逻辑路由器，分别是以太网交换机和 IP 路由器的逻辑版本。就像物理实现一样，逻辑交换机和路由器可以连接到复杂的拓扑结构中。逻辑交换机和路由器通常是纯逻辑实体，也就是说，它们不关联或绑定到任何物理位置，并且在参与 OVN 的每个 Hypervisor 中以分布式方式实现。</p>
+<p>OVN 引入了两个全新的 OVSDB，一个叫 Northbound
+DB（北向数据库，NB），一个叫 Southbound
+DB（南向数据库，SB）；两个库都可以导出远程接口，允许用户通过 OVSDB
+协议对数据库进行操作。</p>
+<p>NB 存放的是我们定义的逻辑交换机、逻辑路由器之类的数据，我们可以通过
+ovn
+提供的命令行（ovn-nbctl）完成添加、删除、修改、查询等操作；当然可以写代码通过
+OVSDB 协议完成类似动作。OVN 的 NB
+是面向“上层应用”的或者叫“云管平台（Cloud Management System，CMS）”。</p>
+<p>SB 进程比较特殊它同时接受两边的“写入”，首先是运行在 ovn-host 上的
+ovn-controller 启动之后会去主动连接到 ovn-central 节点上的 SB
+进程，把自己的 IP 地址（Chassis），本机的 OVS
+状态（Datapath_Binding）写入到 SB 数据库中。ovn-controller 还“监听” SB
+数据库中流表的变化（Flow）去更新本地的 OVS 数据库 -- 流表下发。</p>
+<p>SB 中的流表是由运行在 ovn-central 节点上的 ovn-northd
+进程修改的，ovn-northd 会“监听” NB
+的改变，把逻辑交换机、路由器的定义转换成流表（Flow）写入到 SB
+数据库。</p>
+<p>整个架构非常简单，OVN
+仅仅提供了一组网络模型（逻辑交换机、逻辑路由器等），提供了一个OVSDB
+数据库用来存放这些模型同时把数据库的访问权限开放给最终用户，让最终用户通过
+OVSDB 协议来直接“写入”这些模型（北向）。通过一个叫 ovn-northd
+的进程把网络模型转换成流表，放入另一个数据库让 ovn-host
+自己来“取”流表（南向），以此完成流表下发。</p>
+<h1 id="ovn-应用">OVN 应用</h1>
+<h2 id="ovn-信息流">OVN 信息流</h2>
+<h3 id="配置数据">配置数据</h3>
+<p>OVN 中的配置数据从北向南传递，CMS 使用其 OVN/CMS 插件通过 northbound
+数据库传递 ovn 的逻辑网络配置给 ovn−northd，反过来，ovn−northd
+将配置编译为较低级别的形式，并通过 southbound 数据库将其传递给所有
+chassis；</p>
+<h3 id="状态信息">状态信息</h3>
+<p>ovn 中的状态信息从南向北传递。OVN 目前只提供几种形式的状态信息。</p>
+<p>首先，ovn−northd 填充 northbound Logical_Switch_Port 表中的 up
+表项，如果 southbound port_Binding 表中逻辑端口的 chassis column
+为空，则设置为true，这允许CMS检测VM的网络何时出现。</p>
+<p>第二，OVN 向 CMS 反馈其配置的实现情况，配置是否生效，该功能需要 CMS
+参与一个序列号协议，工作方式如下： - 当 CMS
+更新北向数据库中的配置时，作为同一事务的一部分，它会增加 NB_Global 表中
+nb_cfg 列的值。 - 当 ovn−northd
+根据北向数据库的给定快照更新南向数据库，它将 nb_cfg 从北行 nb_Global
+复制到南向数据库 SB_Global 表中，作为同一事务的一部分。 - 在 ovn−northd
+从南向数据库收到其更改已提交的确认，它将 northbound nb_Global 表中的
+sb_cfg 更新为 NB_cfg 版本。 - ovn−controller 进程接收更新的 southbound
+数据库和更新的 nb_cfg。此过程反过来会更新 Chassis 的 Open vSwitch
+实例中的物理流。当它收到 Open vSwitch 的确认时，物理流更新后，它会在
+southbound 数据库中自己的机箱记录中更新 nb_cfg。 - ovn−northd 监视
+southbound 数据库中所有 Chassis 记录中的 nb_cfg
+列。它跟踪所有记录中的最小值，并将其复制到北行 NB_Global 的 hv_cfg
+列中。</p>
+<h2 id="chassis-设置">Chassis 设置</h2>
+<p>OVN 部署中的每个 Chassis 必须配置一个专用于 OVN 使用的 openvSwitch
+网桥，称为集成网桥。系统启动脚本可能会在启动 ovn-controller
+之前创建此网桥。如果 ovn-controller
+启动时不存在此网桥，将使用下面建议的默认配置自动创建它。集成桥上的端口包括：
+- 在任何 Chassis 上，OVN 用于维护逻辑网络连接的隧道端口。ovn−controller
+添加、更新和删除这些隧道端口。 - openvswitch 本身存在的与 hypervisor
+之间的集成工作。 -
+在网关上，用于逻辑网络连接的物理端口。系统启动脚本在启动 ovn
+之前将此端口添加到
+ovn−controller。在更复杂的设置中，它可以是另一个网桥的 patch
+端口，而不是物理端口。</p>
+<h2 id="逻辑网络">逻辑网络</h2>
+<p>OVN 中的逻辑网络概念包括逻辑交换机和逻辑路由器，分别是以太网交换机和
+IP
+路由器的逻辑版本。就像物理实现一样，逻辑交换机和路由器可以连接到复杂的拓扑结构中。逻辑交换机和路由器通常是纯逻辑实体，也就是说，它们不关联或绑定到任何物理位置，并且在参与
+OVN 的每个 Hypervisor 中以分布式方式实现。</p>
 
     </div>
 

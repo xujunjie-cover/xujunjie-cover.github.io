@@ -225,17 +225,115 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="kata-container"><a href="#kata-container" class="headerlink" title="kata container"></a>kata container</h1><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzA3MDM1NjE0NA==&mid=2247483724&idx=1&sn=87a1eb5dd5464145aaefa5fa34aa92f6&chksm=9f3f5c93a848d585fa1a40849eb8190e93fa5a0a88d36328dca0b280f87e92a746874c20a492#rd">2.x 介绍</a><br><a target="_blank" rel="noopener" href="https://ost.51cto.com/posts/14319">3.0 介绍</a></p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><h2 id="2-x-版本"><a href="#2-x-版本" class="headerlink" title="2.x 版本"></a>2.x 版本</h2><p>Kubernetes 环境中可以使用 kata-deploy 进行安装</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl apply -f https:<span class="regexp">//</span>raw.githubusercontent.com<span class="regexp">/kata-containers/</span>kata-containers<span class="regexp">/main/</span>tools<span class="regexp">/packaging/</span>kata-deploy<span class="regexp">/kata-rbac/</span>base/kata-rbac.yaml</span><br><span class="line">$ kubectl apply -f https:<span class="regexp">//</span>raw.githubusercontent.com<span class="regexp">/kata-containers/</span>kata-containers<span class="regexp">/main/</span>tools<span class="regexp">/packaging/</span>kata-deploy<span class="regexp">/kata-deploy/</span>base/kata-deploy.yaml</span><br></pre></td></tr></table></figure>
-
-<p>创建 runtimeclass</p>
-<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl apply -f https:<span class="regexp">//</span>raw.githubusercontent.com<span class="regexp">/kata-containers/</span>kata-containers<span class="regexp">/main/</span>tools<span class="regexp">/packaging/</span>kata-deploy<span class="regexp">/runtimeclasses/</span>kata-runtimeClasses.yaml</span><br></pre></td></tr></table></figure>
-
-<p>在 yaml 中 spec 下添加 <code>runtimeClassName: kata-qemu</code> 即可使用</p>
+          <h1 id="kata-container">kata container</h1>
+<p><a
+target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzA3MDM1NjE0NA==&amp;mid=2247483724&amp;idx=1&amp;sn=87a1eb5dd5464145aaefa5fa34aa92f6&amp;chksm=9f3f5c93a848d585fa1a40849eb8190e93fa5a0a88d36328dca0b280f87e92a746874c20a492#rd">2.x
+介绍</a> <a target="_blank" rel="noopener" href="https://ost.51cto.com/posts/14319">3.0 介绍</a> # 安装
+## 2.x 版本 Kubernetes 环境中可以使用 kata-deploy 进行安装
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl apply -f https:<span class="regexp">//</span>raw.githubusercontent.com<span class="regexp">/kata-containers/</span>kata-containers<span class="regexp">/main/</span>tools<span class="regexp">/packaging/</span>kata-deploy<span class="regexp">/kata-rbac/</span>base/kata-rbac.yaml</span><br><span class="line">$ kubectl apply -f https:<span class="regexp">//</span>raw.githubusercontent.com<span class="regexp">/kata-containers/</span>kata-containers<span class="regexp">/main/</span>tools<span class="regexp">/packaging/</span>kata-deploy<span class="regexp">/kata-deploy/</span>base/kata-deploy.yaml</span><br></pre></td></tr></table></figure></p>
+<p>创建 runtimeclass <figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kubectl apply -f https:<span class="regexp">//</span>raw.githubusercontent.com<span class="regexp">/kata-containers/</span>kata-containers<span class="regexp">/main/</span>tools<span class="regexp">/packaging/</span>kata-deploy<span class="regexp">/runtimeclasses/</span>kata-runtimeClasses.yaml</span><br></pre></td></tr></table></figure></p>
+<p>在 yaml 中 spec 下添加 <code>runtimeClassName: kata-qemu</code>
+即可使用</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/09/07/Kata-Container-2-x-%E5%92%8C-3-0-%E5%AE%89%E8%A3%85%EF%BC%8C%E5%86%85%E6%A0%B8%E7%BC%96%E8%AF%91%EF%BC%8C%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/07/%E5%88%A8%E6%A0%B9%E9%97%AE%E5%BA%95-Kubernetes-CNI-%EF%BC%88%E4%B8%89%EF%BC%89Multus-CNI/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Xu Junjie">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="XuJunjie's Blog">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | XuJunjie's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/09/07/%E5%88%A8%E6%A0%B9%E9%97%AE%E5%BA%95-Kubernetes-CNI-%EF%BC%88%E4%B8%89%EF%BC%89Multus-CNI/" class="post-title-link" itemprop="url">刨根问底 Kubernetes -- CNI （三）Multus</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2022-09-07 00:27:54" itemprop="dateCreated datePublished" datetime="2022-09-07T00:27:54+08:00">2022-09-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">更新于</span>
+      <time title="修改时间：2022-11-22 11:15:32" itemprop="dateModified" datetime="2022-11-22T11:15:32+08:00">2022-11-22</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">分类于</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/categories/CloudNative/" itemprop="url" rel="index"><span itemprop="name">CloudNative</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <h1 id="multus-概述">Multus 概述</h1>
+<p>Kubernetes 的 POD 默认不支持多网卡设置，我们通过 Multus CNI 来为 Pod
+建立多网络接口。</p>
+<h1 id="multus-使用">Multus 使用</h1>
+<p>Multus 安装很简单</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git <span class="built_in">clone</span> https://github.com/intel/multus-cni.git &amp;&amp; <span class="built_in">cd</span> multus-cni</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cat</span> ./images/multus-daemonset.yml | kubectl apply -f -</span></span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2022/09/07/%E5%88%A8%E6%A0%B9%E9%97%AE%E5%BA%95-Kubernetes-CNI-%EF%BC%88%E4%B8%89%EF%BC%89Multus-CNI/#more" rel="contents">
                 阅读全文 &raquo;
               </a>
             </div>
@@ -302,7 +400,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-11-17 15:49:58" itemprop="dateModified" datetime="2022-11-17T15:49:58+08:00">2022-11-17</time>
+      <time title="修改时间：2022-11-18 18:21:13" itemprop="dateModified" datetime="2022-11-18T18:21:13+08:00">2022-11-18</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -324,18 +422,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          # 概述
-本文通过在 kubernetes 环境中 kubelet 通过 cri （container runtime interface）规范使用 containerd 去调取 CNI 进行 pod 网络配置来描述
-
-conatainerd 版本: v1.6.8
-cni: kube-ovn: v1.11.0
-kubernetes: v1.23.6
-> 环境中是 kube-ovn 做为 cni，所以从 kube-ovn 的环境讲起
-
-架构如图所示
-![cri](/img/containerd_cri_architecture.png)
-
-CNI 的工作是由 kubelet 调取 containerd cri plugin 开始的，下面介绍具体的代码实现
+          <h1 id="概述">概述</h1>
+<p>本文通过在 kubernetes 环境中 kubelet 通过 cri （container runtime
+interface）规范使用 containerd 去调取 CNI 进行 pod 网络配置来描述</p>
+<p>conatainerd 版本: v1.6.8 cni: kube-ovn: v1.11.0 kubernetes: v1.23.6
+&gt; 环境中是 kube-ovn 做为 cni，所以从 kube-ovn 的环境讲起</p>
+<p>架构如图所示 <img src="/img/containerd_cri_architecture.png"
+alt="cri" /></p>
+<p>CNI 的工作是由 kubelet 调取 containerd cri plugin
+开始的，下面介绍具体的代码实现</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/09/07/%E5%88%A8%E6%A0%B9%E9%97%AE%E5%BA%95-Kubernetes-CNI-%EF%BC%88%E4%BA%8C%EF%BC%89CNI-%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/#more" rel="contents">
@@ -344,130 +439,6 @@ CNI 的工作是由 kubelet 调取 containerd cri plugin 开始的，下面介�
             </div>
           <!--/noindex-->
         
-      
-    </div>
-
-    
-    
-    
-
-    <footer class="post-footer">
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-</div>
-
-
-
-
-    
-
-
-<div class="post-block">
-  
-  
-
-  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/07/%E5%88%A8%E6%A0%B9%E9%97%AE%E5%BA%95%20Kubernetes-CNI-%EF%BC%88%E4%B8%89%EF%BC%89Multus-CNI/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
-      <meta itemprop="name" content="Xu Junjie">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="XuJunjie's Blog">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="undefined | XuJunjie's Blog">
-      <meta itemprop="description" content="">
-    </span>
-      <header class="post-header">
-        <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/09/07/%E5%88%A8%E6%A0%B9%E9%97%AE%E5%BA%95%20Kubernetes-CNI-%EF%BC%88%E4%B8%89%EF%BC%89Multus-CNI/" class="post-title-link" itemprop="url">刨根问底 Kubernetes -- CNI （三）Multus</a>
-        </h2>
-
-        <div class="post-meta-container">
-          <div class="post-meta">
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar"></i>
-      </span>
-      <span class="post-meta-item-text">发表于</span>
-
-      <time title="创建时间：2022-09-07 00:27:54" itemprop="dateCreated datePublished" datetime="2022-09-07T00:27:54+08:00">2022-09-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-11-17 16:42:40" itemprop="dateModified" datetime="2022-11-17T16:42:40+08:00">2022-11-17</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/CloudNative/" itemprop="url" rel="index"><span itemprop="name">CloudNative</span></a>
-        </span>
-    </span>
-
-  
-</div>
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-          
-# Multus 概述
-Kubernetes 的 POD 默认不支持多网卡设置，我们通过 Multus CNI 来为 Pod 建立多网络接口。
-
-
-
-# Multus 使用
-Multus 安装很简单
-
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta prompt_">$ </span><span class="language-bash">git <span class="built_in">clone</span> https://github.com/intel/multus-cni.git &amp;&amp; <span class="built_in">cd</span> multus-cni</span></span><br><span class="line"><span class="meta prompt_">$ </span><span class="language-bash"><span class="built_in">cat</span> ./images/multus-daemonset.yml | kubectl apply -f -</span></span><br></pre></td></tr></table></figure>
-
-## Multus DaemonSet 的作用
-- 启动一个 Multus 守护程序集，这会在每个节点上运行一个 pod，它在每个节点上放置一个 Multus 二进制文件/opt/cni/bin
-
-- 读取按字典顺序（按字母顺序）的第一个配置文件/etc/cni/net.d，并在每个节点上为 Multus 创建一个新的配置文件/etc/cni/net.d/00-multus.conf，此配置是自动生成的，并且基于默认网络配置（假定为按字母顺序排列的第一个配置）
-
-- 在每个节点上创建一个/etc/cni/net.d/multus.d目录，其中包含 Multus 访问 Kubernetes API 的身份验证信息。
-
-- 安装 network-attachment-definition CRD，这个 CRD 存储着其他 CNI 的信息，在 Multus 看到使用此资源时，会调用设置的 CNI 去配置网络。
-
-其中第二点，安装 Multus 会将原有的 CNI 作为代理的一部分放到自己的 CNI 配置中，当 work 时，也会使用之前的 CNI 创建第一张网卡。
-如图:
-[image]
-
-配置变化, 可以看到 原有的 CNI 配置完全存在于 Multus 的 delegates 里，通过配置变化，containerd 调用 CNI 时实际调用的是 Multus 的 CNI。
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="regexp">/etc/</span>cni<span class="regexp">/net.d/</span><span class="number">01</span>-kube-ovn.conflist </span><br><span class="line">&#123;</span><br><span class="line">    <span class="string">&quot;name&quot;</span>:<span class="string">&quot;kube-ovn&quot;</span>,</span><br><span class="line">    <span class="string">&quot;cniVersion&quot;</span>:<span class="string">&quot;0.3.1&quot;</span>,</span><br><span class="line">    <span class="string">&quot;plugins&quot;</span>:[</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">&quot;type&quot;</span>:<span class="string">&quot;kube-ovn&quot;</span>,</span><br><span class="line">            <span class="string">&quot;server_socket&quot;</span>:<span class="string">&quot;/run/openvswitch/kube-ovn-daemon.sock&quot;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="string">&quot;type&quot;</span>:<span class="string">&quot;portmap&quot;</span>,</span><br><span class="line">            <span class="string">&quot;capabilities&quot;</span>:&#123;</span><br><span class="line">                <span class="string">&quot;portMappings&quot;</span>:<span class="keyword">true</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
-<figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/etc/</span>cni<span class="regexp">/net.d/</span><span class="number">00</span>-multus.conf | jq</span><br><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;capabilities&quot;</span>: &#123;</span><br><span class="line">    <span class="string">&quot;portMappings&quot;</span>: <span class="keyword">true</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="string">&quot;cniVersion&quot;</span>: <span class="string">&quot;0.3.1&quot;</span>,</span><br><span class="line">  <span class="string">&quot;delegates&quot;</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">&quot;cniVersion&quot;</span>: <span class="string">&quot;0.3.1&quot;</span>,</span><br><span class="line">      <span class="string">&quot;name&quot;</span>: <span class="string">&quot;kube-ovn&quot;</span>,</span><br><span class="line">      <span class="string">&quot;plugins&quot;</span>: [</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="string">&quot;server_socket&quot;</span>: <span class="string">&quot;/run/openvswitch/kube-ovn-daemon.sock&quot;</span>,</span><br><span class="line">          <span class="string">&quot;type&quot;</span>: <span class="string">&quot;kube-ovn&quot;</span></span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">          <span class="string">&quot;capabilities&quot;</span>: &#123;</span><br><span class="line">            <span class="string">&quot;portMappings&quot;</span>: <span class="keyword">true</span></span><br><span class="line">          &#125;,</span><br><span class="line">          <span class="string">&quot;type&quot;</span>: <span class="string">&quot;portmap&quot;</span></span><br><span class="line">        &#125;</span><br><span class="line">      ]</span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">&quot;logLevel&quot;</span>: <span class="string">&quot;debug&quot;</span>,</span><br><span class="line">  <span class="string">&quot;logToStderr&quot;</span>: <span class="keyword">true</span>,</span><br><span class="line">  <span class="string">&quot;kubeconfig&quot;</span>: <span class="string">&quot;/etc/cni/net.d/multus.d/multus.kubeconfig&quot;</span>,</span><br><span class="line">  <span class="string">&quot;name&quot;</span>: <span class="string">&quot;multus-cni-network&quot;</span>,</span><br><span class="line">  <span class="string">&quot;type&quot;</span>: <span class="string">&quot;multus&quot;</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-## Multus 的使用
-希望两个网卡都使用 kube-ovn 为 pod 创建
-Network-Attachment-Definition 创建
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Namespace</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">mec-nets</span></span><br><span class="line"><span class="meta">---</span></span><br><span class="line"><span class="attr">apiVersion:</span> <span class="string">&quot;k8s.cni.cncf.io/v1&quot;</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">NetworkAttachmentDefinition</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">attachnet1</span></span><br><span class="line">  <span class="attr">namespace:</span> <span class="string">mec-nets</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">config:</span> <span class="string">&#x27;&#123;</span></span><br><span class="line"><span class="string">      &quot;cniVersion&quot;: &quot;0.3.0&quot;,</span></span><br><span class="line"><span class="string">      &quot;type&quot;: &quot;kube-ovn&quot;,</span></span><br><span class="line"><span class="string">      &quot;server_socket&quot;: &quot;/run/openvswitch/kube-ovn-daemon.sock&quot;,</span></span><br><span class="line"><span class="string">      &quot;provider&quot;: &quot;attachnet1.mec-nets.ovn&quot;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br></pre></td></tr></table></figure>
-创建 Pod
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">apiVersion:</span> <span class="string">v1</span></span><br><span class="line"><span class="attr">kind:</span> <span class="string">Pod</span></span><br><span class="line"><span class="attr">metadata:</span></span><br><span class="line">  <span class="attr">name:</span> <span class="string">pod9</span></span><br><span class="line">  <span class="attr">annotations:</span></span><br><span class="line">    <span class="attr">ovn.kubernetes.io/logical_switch:</span> <span class="string">subnet-ipv4-ns-demo-100</span></span><br><span class="line">    <span class="attr">k8s.v1.cni.cncf.io/networks:</span> <span class="string">mec-nets/attachnet1</span>   <span class="comment"># 选择 NetworkAttachmentDefinition</span></span><br><span class="line">    <span class="attr">attachnet1.mec-nets.ovn.kubernetes.io/logical_switch:</span> <span class="string">subnet-ipv4-ns-demo-100</span></span><br><span class="line"><span class="attr">spec:</span></span><br><span class="line">  <span class="attr">containers:</span></span><br><span class="line">  <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">pod9</span></span><br><span class="line">    <span class="attr">command:</span> [<span class="string">&quot;/bin/ash&quot;</span>, <span class="string">&quot;-c&quot;</span>, <span class="string">&quot;trap : TERM INT; sleep 36000 &amp; wait&quot;</span>]</span><br><span class="line">    <span class="attr">image:</span> <span class="string">rancher/curl</span></span><br><span class="line">  <span class="attr">nodeSelector:</span></span><br><span class="line">    <span class="attr">kubernetes.io/hostname:</span> <span class="string">eci2</span></span><br></pre></td></tr></table></figure>
-
-
-## Multus 的 处理
-符合 CNI 的标准规范，在 containerd 调用 plugin (multus 二进制) 后，multus 进行处理
-
-pkg/multus/miltus.go L557
-<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">func <span class="built_in">CmdAdd</span>(args *skel<span class="selector-class">.CmdArgs</span>, exec invoke<span class="selector-class">.Exec</span>, kubeClient *k8s.ClientInfo) (cnitypes<span class="selector-class">.Result</span>, error) &#123;</span><br><span class="line">    n, err := types<span class="selector-class">.LoadNetConf</span>(args.StdinData)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -545,11 +516,20 @@ pkg/multus/miltus.go L557
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="CNI-概述"><a href="#CNI-概述" class="headerlink" title="CNI 概述"></a>CNI 概述</h1><p>The Container Network Interface<br>CNI（容器网络接口）是一个云原生计算基础项目，由一个规范和库组成，用于编写用于在 Linux 容器中配置网络接口的插件，以及许多受支持的插件。CNI 只专注于容器的网络连接，并在删除容器时删除分配的资源。由于这种专注，CNI 得到了广泛的支持，并且规范易于实现。</p>
-<p>除了规范之外，CNI 仓库还包含用于将 CNI 集成到应用程序中的库的 Go 源代码，以及用于执行 CNI 插件的示例命令行工具。一个单独的仓库包含参考插件和用于创建新插件的模板。</p>
-<p>模板代码可以直接为现有的容器网络项目创建  CNI 插件。CNI 也为从头开始创建新的容器网络项目提供了一个良好的框架。</p>
+          <h1 id="cni-概述">CNI 概述</h1>
+<p>The Container Network Interface
+CNI（容器网络接口）是一个云原生计算基础项目，由一个规范和库组成，用于编写用于在
+Linux 容器中配置网络接口的插件，以及许多受支持的插件。CNI
+只专注于容器的网络连接，并在删除容器时删除分配的资源。由于这种专注，CNI
+得到了广泛的支持，并且规范易于实现。</p>
+<p>除了规范之外，CNI 仓库还包含用于将 CNI 集成到应用程序中的库的 Go
+源代码，以及用于执行 CNI
+插件的示例命令行工具。一个单独的仓库包含参考插件和用于创建新插件的模板。</p>
+<p>模板代码可以直接为现有的容器网络项目创建 CNI 插件。CNI
+也为从头开始创建新的容器网络项目提供了一个良好的框架。</p>
 <ul>
-<li><a target="_blank" rel="noopener" href="https://github.com/containernetworking/plugins">CNI plugin</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/containernetworking/plugins">CNI
+plugin</a></li>
 <li><a target="_blank" rel="noopener" href="https://github.com/containernetworking/cni">CNI</a></li>
 </ul>
 <p>在网络插件和容器执行之间定义一个公共接口是谨慎的：所以提出了此规范。</p>
@@ -638,7 +618,11 @@ pkg/multus/miltus.go L557
     
     
     <div class="post-body" itemprop="articleBody">
-          <h1 id="OVN-介绍"><a href="#OVN-介绍" class="headerlink" title="OVN 介绍"></a>OVN 介绍</h1><p>Open vSwitch（OVS）是一款开源的“虚拟交换机”，控制协议方面它不但支持 OpenFlow 的所有特性而且扩展了部分 OpenFlow 的功能；Overlay 协议方面它支持 GRE, VXLAN, STT, Geneve 四种主流Overlay 数据包。OVS 已经是数据平面的事实标准了。</p>
+          <h1 id="ovn-介绍">OVN 介绍</h1>
+<p>Open vSwitch（OVS）是一款开源的“虚拟交换机”，控制协议方面它不但支持
+OpenFlow 的所有特性而且扩展了部分 OpenFlow 的功能；Overlay
+协议方面它支持 GRE, VXLAN, STT, Geneve 四种主流Overlay 数据包。OVS
+已经是数据平面的事实标准了。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/08/29/OVN-%E7%AE%80%E4%BB%8B/#more" rel="contents">
@@ -730,7 +714,10 @@ pkg/multus/miltus.go L557
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>我如果爱你，<br>绝不像攀援的凌霄花，<br>借你的高枝炫耀自己；<br>我如果爱你，<br>绝不学痴情的鸟儿，<br>为绿荫重复单调的歌曲；<br>也不止像泉源，<br>常年送来清凉的慰藉；<br>也不止像险峰，<br>增加你的高度，衬托你的威仪。<br>甚至日光，<br>甚至春雨。</p>
+          <p>我如果爱你， 绝不像攀援的凌霄花， 借你的高枝炫耀自己； 我如果爱你，
+绝不学痴情的鸟儿， 为绿荫重复单调的歌曲； 也不止像泉源，
+常年送来清凉的慰藉； 也不止像险峰， 增加你的高度，衬托你的威仪。
+甚至日光， 甚至春雨。</p>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2022/08/26/%E8%87%B4%E6%A9%A1%E6%A0%91/#more" rel="contents">
