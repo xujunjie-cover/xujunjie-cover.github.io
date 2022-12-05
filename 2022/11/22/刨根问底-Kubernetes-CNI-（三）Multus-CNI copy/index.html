@@ -21,29 +21,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Gemini","darkmode":true,"version":"8.11.1","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":false,"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":true,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Multus 概述 Kubernetes 的 POD 默认不支持多网卡设置，我们通过 Multus CNI 来为 Pod 建立多网络接口。 Multus 使用 Multus 安装很简单 12$ git clone https:&#x2F;&#x2F;github.com&#x2F;intel&#x2F;multus-cni.git &amp;&amp; cd multus-cni$ cat .&#x2F;images&#x2F;multus-da">
+    <meta name="description" content="Sriov 概述 Kubernetes 的 POD 默认不支持多网卡设置，我们通过 Multus CNI 来为 Pod 建立多网络接口。 Multus 使用 Multus 安装很简单 12$ git clone https:&#x2F;&#x2F;github.com&#x2F;intel&#x2F;multus-cni.git &amp;&amp; cd multus-cni$ cat .&#x2F;images&#x2F;multus-dae">
 <meta property="og:type" content="article">
-<meta property="og:title" content="刨根问底 Kubernetes -- CNI （三）Multus">
-<meta property="og:url" content="http://example.com/2022/09/07/%E5%88%A8%E6%A0%B9%E9%97%AE%E5%BA%95-Kubernetes-CNI-%EF%BC%88%E4%B8%89%EF%BC%89Multus-CNI/index.html">
+<meta property="og:title" content="刨根问底 Kubernetes -- CNI （四）Sriov">
+<meta property="og:url" content="http://example.com/2022/11/22/%E5%88%A8%E6%A0%B9%E9%97%AE%E5%BA%95-Kubernetes-CNI-%EF%BC%88%E4%B8%89%EF%BC%89Multus-CNI%20copy/index.html">
 <meta property="og:site_name" content="XuJunjie&#39;s Blog">
-<meta property="og:description" content="Multus 概述 Kubernetes 的 POD 默认不支持多网卡设置，我们通过 Multus CNI 来为 Pod 建立多网络接口。 Multus 使用 Multus 安装很简单 12$ git clone https:&#x2F;&#x2F;github.com&#x2F;intel&#x2F;multus-cni.git &amp;&amp; cd multus-cni$ cat .&#x2F;images&#x2F;multus-da">
+<meta property="og:description" content="Sriov 概述 Kubernetes 的 POD 默认不支持多网卡设置，我们通过 Multus CNI 来为 Pod 建立多网络接口。 Multus 使用 Multus 安装很简单 12$ git clone https:&#x2F;&#x2F;github.com&#x2F;intel&#x2F;multus-cni.git &amp;&amp; cd multus-cni$ cat .&#x2F;images&#x2F;multus-dae">
 <meta property="og:locale" content="zh_CN">
-<meta property="article:published_time" content="2022-09-06T16:27:54.000Z">
-<meta property="article:modified_time" content="2022-11-22T07:25:19.904Z">
+<meta property="article:published_time" content="2022-11-22T07:29:00.000Z">
+<meta property="article:modified_time" content="2022-11-22T08:20:27.223Z">
 <meta property="article:author" content="Xu Junjie">
 <meta property="article:tag" content="Kubernetes">
 <meta property="article:tag" content="CNI">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/2022/09/07/%E5%88%A8%E6%A0%B9%E9%97%AE%E5%BA%95-Kubernetes-CNI-%EF%BC%88%E4%B8%89%EF%BC%89Multus-CNI/">
+<link rel="canonical" href="http://example.com/2022/11/22/%E5%88%A8%E6%A0%B9%E9%97%AE%E5%BA%95-Kubernetes-CNI-%EF%BC%88%E4%B8%89%EF%BC%89Multus-CNI%20copy/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/09/07/%E5%88%A8%E6%A0%B9%E9%97%AE%E5%BA%95-Kubernetes-CNI-%EF%BC%88%E4%B8%89%EF%BC%89Multus-CNI/","path":"2022/09/07/刨根问底-Kubernetes-CNI-（三）Multus-CNI/","title":"刨根问底 Kubernetes -- CNI （三）Multus"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"http://example.com/2022/11/22/%E5%88%A8%E6%A0%B9%E9%97%AE%E5%BA%95-Kubernetes-CNI-%EF%BC%88%E4%B8%89%EF%BC%89Multus-CNI%20copy/","path":"2022/11/22/刨根问底-Kubernetes-CNI-（三）Multus-CNI copy/","title":"刨根问底 Kubernetes -- CNI （四）Sriov"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>刨根问底 Kubernetes -- CNI （三）Multus | XuJunjie's Blog</title>
+<title>刨根问底 Kubernetes -- CNI （四）Sriov | XuJunjie's Blog</title>
   
 
 
@@ -118,7 +118,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#multus-%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">Multus 概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#multus-%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">Multus 使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#multus-daemonset-%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">2.1.</span> <span class="nav-text">Multus DaemonSet 的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#multus-%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">2.2.</span> <span class="nav-text">Multus 的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#multus-%E7%9A%84-%E5%A4%84%E7%90%86"><span class="nav-number">2.3.</span> <span class="nav-text">Multus 的 处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8E-input-%E5%8A%A0%E8%BD%BD-netconf-%E5%B0%86-cni-%E9%85%8D%E7%BD%AE%E5%8A%A0%E8%BD%BD%E5%88%B0-netconf.delegates"><span class="nav-number">2.3.1.</span> <span class="nav-text">1. 从
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#sriov-%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">Sriov 概述</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#multus-%E4%BD%BF%E7%94%A8"><span class="nav-number">2.</span> <span class="nav-text">Multus 使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#multus-daemonset-%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="nav-number">2.1.</span> <span class="nav-text">Multus DaemonSet 的作用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#multus-%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="nav-number">2.2.</span> <span class="nav-text">Multus 的使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#multus-%E7%9A%84-%E5%A4%84%E7%90%86"><span class="nav-number">2.3.</span> <span class="nav-text">Multus 的 处理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BB%8E-input-%E5%8A%A0%E8%BD%BD-netconf-%E5%B0%86-cni-%E9%85%8D%E7%BD%AE%E5%8A%A0%E8%BD%BD%E5%88%B0-netconf.delegates"><span class="nav-number">2.3.1.</span> <span class="nav-text">1. 从
 input 加载 netConf, 将 cni 配置加载到 netConf.Delegates</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%8A%A0%E8%BD%BD%E5%A7%94%E6%89%98%E6%8F%92%E4%BB%B6delegate%E5%B9%B6%E5%B0%86%E5%85%B6%E6%B7%BB%E5%8A%A0%E8%87%B3-multus-%E9%85%8D%E7%BD%AE"><span class="nav-number">2.3.2.</span> <span class="nav-text">2.
 加载委托插件（delegate）并将其添加至 multus 配置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B0%9D%E8%AF%95%E8%A7%A3%E6%9E%90-pod-%E6%B3%A8%E8%A7%A3%E4%B8%AD-multus-%E9%85%8D%E7%BD%AE"><span class="nav-number">2.3.2.1.</span> <span class="nav-text">2.1. 尝试解析 Pod 注解中 multus
 配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%8C%87%E5%AE%9A%E7%9A%84-network-attachment-definition"><span class="nav-number">2.3.2.2.</span> <span class="nav-text">2.2. 获取指定的
@@ -195,7 +195,7 @@ Network-attachment-definition</span></a></li></ol></li><li class="nav-item nav-l
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/07/%E5%88%A8%E6%A0%B9%E9%97%AE%E5%BA%95-Kubernetes-CNI-%EF%BC%88%E4%B8%89%EF%BC%89Multus-CNI/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/22/%E5%88%A8%E6%A0%B9%E9%97%AE%E5%BA%95-Kubernetes-CNI-%EF%BC%88%E4%B8%89%EF%BC%89Multus-CNI%20copy/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/img/jiaozi.jpg">
@@ -208,12 +208,12 @@ Network-attachment-definition</span></a></li></ol></li><li class="nav-item nav-l
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="刨根问底 Kubernetes -- CNI （三）Multus | XuJunjie's Blog">
+      <meta itemprop="name" content="刨根问底 Kubernetes -- CNI （四）Sriov | XuJunjie's Blog">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          刨根问底 Kubernetes -- CNI （三）Multus
+          刨根问底 Kubernetes -- CNI （四）Sriov
         </h1>
 
         <div class="post-meta-container">
@@ -223,15 +223,9 @@ Network-attachment-definition</span></a></li></ol></li><li class="nav-item nav-l
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">发表于</span>
+      
 
-      <time title="创建时间：2022-09-07 00:27:54" itemprop="dateCreated datePublished" datetime="2022-09-07T00:27:54+08:00">2022-09-07</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-11-22 15:25:19" itemprop="dateModified" datetime="2022-11-22T15:25:19+08:00">2022-11-22</time>
+      <time title="创建时间：2022-11-22 15:29:00 / 修改时间：16:20:27" itemprop="dateCreated datePublished" datetime="2022-11-22T15:29:00+08:00">2022-11-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -253,7 +247,7 @@ Network-attachment-definition</span></a></li></ol></li><li class="nav-item nav-l
     
     
     <div class="post-body" itemprop="articleBody">
-        <h1 id="multus-概述">Multus 概述</h1>
+        <h1 id="sriov-概述">Sriov 概述</h1>
 <p>Kubernetes 的 POD 默认不支持多网卡设置，我们通过 Multus CNI 来为 Pod
 建立多网络接口。</p>
 <h1 id="multus-使用">Multus 使用</h1>
@@ -340,14 +334,11 @@ L612 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span c
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2022/09/07/%E5%88%A8%E6%A0%B9%E9%97%AE%E5%BA%95-Kubernetes-CNI-%EF%BC%88%E4%BA%8C%EF%BC%89CNI-%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/" rel="prev" title="刨根问底 Kubernetes -- CNI （二）CNI 使用代码分析">
-                  <i class="fa fa-chevron-left"></i> 刨根问底 Kubernetes -- CNI （二）CNI 使用代码分析
+                <a href="/2022/09/07/Kata-Container-2-x-%E5%92%8C-3-0-%E5%AE%89%E8%A3%85%EF%BC%8C%E5%86%85%E6%A0%B8%E7%BC%96%E8%AF%91%EF%BC%8C%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/" rel="prev" title="Kata Container 2.x 和 3.0 安装，内核编译，镜像制作">
+                  <i class="fa fa-chevron-left"></i> Kata Container 2.x 和 3.0 安装，内核编译，镜像制作
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2022/09/07/Kata-Container-2-x-%E5%92%8C-3-0-%E5%AE%89%E8%A3%85%EF%BC%8C%E5%86%85%E6%A0%B8%E7%BC%96%E8%AF%91%EF%BC%8C%E9%95%9C%E5%83%8F%E5%88%B6%E4%BD%9C/" rel="next" title="Kata Container 2.x 和 3.0 安装，内核编译，镜像制作">
-                  Kata Container 2.x 和 3.0 安装，内核编译，镜像制作 <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>

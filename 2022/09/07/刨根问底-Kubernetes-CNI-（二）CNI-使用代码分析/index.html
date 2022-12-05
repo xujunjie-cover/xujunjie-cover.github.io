@@ -30,7 +30,7 @@
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://example.com/img/containerd_cri_architecture.png">
 <meta property="article:published_time" content="2022-09-06T16:27:54.000Z">
-<meta property="article:modified_time" content="2022-11-18T10:21:13.457Z">
+<meta property="article:modified_time" content="2022-11-22T03:36:06.343Z">
 <meta property="article:author" content="Xu Junjie">
 <meta property="article:tag" content="Kubernetes">
 <meta property="article:tag" content="CNI">
@@ -126,6 +126,8 @@
 
         <div class="site-overview-wrap sidebar-panel">
           <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Xu Junjie"
+      src="/img/jiaozi.jpg">
   <p class="site-author-name" itemprop="name">Xu Junjie</p>
   <div class="site-description" itemprop="description"></div>
 </div>
@@ -133,7 +135,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-count">7</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -149,6 +151,14 @@
       </div>
   </nav>
 </div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/xujunjie-cover" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;xujunjie-cover" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/xujunjielxx@163.com" title="E-Mail → xujunjielxx@163.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
 
 
 
@@ -186,7 +196,7 @@
     <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/07/%E5%88%A8%E6%A0%B9%E9%97%AE%E5%BA%95-Kubernetes-CNI-%EF%BC%88%E4%BA%8C%EF%BC%89CNI-%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%A0%81%E5%88%86%E6%9E%90/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="image" content="/img/jiaozi.jpg">
       <meta itemprop="name" content="Xu Junjie">
     </span>
 
@@ -219,7 +229,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2022-11-18 18:21:13" itemprop="dateModified" datetime="2022-11-18T18:21:13+08:00">2022-11-18</time>
+      <time title="修改时间：2022-11-22 11:36:06" itemprop="dateModified" datetime="2022-11-22T11:36:06+08:00">2022-11-22</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -252,6 +262,12 @@ alt="cri" /></p>
 开始的，下面介绍具体的代码实现</p>
 <span id="more"></span>
 <h1 id="containerd-代码分析">containerd 代码分析</h1>
+<blockquote>
+<p>kubelet 通过 grpc 调用 containerd 的 RunSanbox 方法，创建了 Pod运
+行的基本环境，包括 pause 容器和c ontainerd-shim。 kubelet 通过 grpc 调用
+containerd 的 CreateContainer 和 StartContainer 创建 Pod 中的容器，包括
+initContainer 和 normalContainer。</p>
+</blockquote>
 <p>在初始化时加载了 CNI 的配置, 默认配置从 <code>/etc/cni/net.d/</code>
 下读取；然后加载不同的 runtime，如果 runtime 下有指定 cni
 配置路径，则也会加载。 pkg/cri/server/service_linux.go <figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">func</span> <span class="params">(c *criService)</span></span> initPlatform() (err <span class="type">error</span>) &#123;</span><br><span class="line">    pluginDirs := <span class="keyword">map</span>[<span class="type">string</span>]<span class="type">string</span>&#123;</span><br><span class="line">		defaultNetworkPlugin: c.config.NetworkPluginConfDir,</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">for</span> name, conf := <span class="keyword">range</span> c.config.Runtimes &#123;</span><br><span class="line">		<span class="keyword">if</span> conf.NetworkPluginConfDir != <span class="string">&quot;&quot;</span> &#123;</span><br><span class="line">			pluginDirs[name] = conf.NetworkPluginConfDir</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	c.netPlugin = <span class="built_in">make</span>(<span class="keyword">map</span>[<span class="type">string</span>]cni.CNI)</span><br><span class="line">	<span class="keyword">for</span> name, dir := <span class="keyword">range</span> pluginDirs &#123;</span><br><span class="line">		max := c.config.NetworkPluginMaxConfNum</span><br><span class="line">		<span class="keyword">if</span> name != defaultNetworkPlugin &#123;</span><br><span class="line">			<span class="keyword">if</span> m := c.config.Runtimes[name].NetworkPluginMaxConfNum; m != <span class="number">0</span> &#123;</span><br><span class="line">				max = m</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="comment">// Pod needs to attach to at least loopback network and a non host network,</span></span><br><span class="line">		<span class="comment">// hence networkAttachCount is 2. If there are more network configs the</span></span><br><span class="line">		<span class="comment">// pod will be attached to all the networks but we will only use the ip</span></span><br><span class="line">		<span class="comment">// of the default network interface as the pod IP.</span></span><br><span class="line">		i, err := cni.New(cni.WithMinNetworkCount(networkAttachCount),</span><br><span class="line">			cni.WithPluginConfDir(dir),</span><br><span class="line">			cni.WithPluginMaxConfNum(max),</span><br><span class="line">			cni.WithPluginDir([]<span class="type">string</span>&#123;c.config.NetworkPluginBinDir&#125;))</span><br><span class="line">		<span class="keyword">if</span> err != <span class="literal">nil</span> &#123;</span><br><span class="line">			<span class="keyword">return</span> fmt.Errorf(<span class="string">&quot;failed to initialize cni: %w&quot;</span>, err)</span><br><span class="line">		&#125;</span><br><span class="line">		c.netPlugin[name] = i</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
